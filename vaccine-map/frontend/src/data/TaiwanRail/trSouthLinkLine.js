@@ -1,0 +1,51 @@
+export const trSouthLinkLine = [
+    {
+        value:' ',
+        label:'',
+    },
+
+    {
+        value:'加祿',
+        label:'加祿',
+    },
+    {
+        value:'內獅',
+        label:'內獅',
+    },
+    {
+        value:'枋山',
+        label:'枋山',
+    },
+    {
+        value:'古莊',
+        label:'古莊',
+    },
+    {
+        value:'大武',
+        label:'大武',
+    },
+    {
+        value:'瀧溪',
+        label:'瀧溪',
+    },
+    {
+        value:'金崙',
+        label:'金崙',
+    },
+    {
+        value:'太麻里',
+        label:'太麻里',
+    },
+    {
+        value:'知本',
+        label:'知本',
+    },
+    {
+        value:'康樂',
+        label:'康樂',
+    },
+    {
+        value:'台東',
+        label:'台東',
+    },
+]

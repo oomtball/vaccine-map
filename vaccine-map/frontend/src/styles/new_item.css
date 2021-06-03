@@ -1,0 +1,108 @@
+.new_item-root
+{
+    padding: 0 0 0;
+    position: relative;
+}
+
+.new_item-bgcolor
+{
+    width:14%;
+    height:775px;
+    background-color:#fcd29f;
+    float: left;
+    z-index: -1;
+}
+.new_item-bgcolor2
+{
+    width:14%;
+    height:775px;
+    background-color:#fcd29f;
+    float: right;
+}
+
+
+.clear
+{
+    clear: both;
+}
+.new_item-dateselection
+{
+
+    margin-left: 0px;
+    margin-top:25px;
+}
+.new_item-appbar
+{
+    position: absolute;
+    flex-grow: 1;
+    width: 72%;
+    margin-left: 13.5%;
+    z-index: 0;
+    float: left;
+}
+.new_item-address
+{
+    margin-top:25px;
+
+
+}
+.new_item-basic
+{
+    margin-top: 15px;
+    
+}
+.special-mention
+{
+    margin-top:25px;
+
+
+}
+
+.support-font
+{
+    line-height: 82px;
+    /* font-family: 'Noto Serif TC', serif; */
+
+}
+
+.upload-button
+{
+    width: 30%;
+    height: 250px;
+    float: left;
+}
+.overflow-scrolling-inNewItem
+{
+    overflow-y: scroll;
+    background-color:#fde0d3;
+    width:72%;
+    float: left;
+    height: 775px;
+}
+.new_item-confirm-table
+{
+    width: 100%;
+   
+}
+
+.new_item-confirm-title
+{
+    background-color: #fcd29f;
+    
+    text-align: center;
+}
+.new_item-confirm-title-font
+{
+    margin : 0;
+    padding: 0;
+   
+}
+
+.new_item-td
+{
+    background-color: #fde0d3;
+    width: 25%;
+    font-size: 18px;
+    line-height: 40px;
+    vertical-align: top;
+}

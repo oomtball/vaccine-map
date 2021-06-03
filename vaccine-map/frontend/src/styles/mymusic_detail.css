@@ -1,0 +1,25 @@
+.music-detail_button-container {
+    margin-top: 4vh;
+    margin-bottom: 4vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.music-detail_button {
+    float: right;
+    color: #ffffff;
+    width: 7vw;
+    height: 5vh;
+    line-height: 4.5vh;
+    background-color: rgb(78, 78, 78);
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.music-detail_button:hover {
+    color: #000000;
+    background-color: #ffffff;
+}

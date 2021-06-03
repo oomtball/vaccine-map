@@ -1,0 +1,34 @@
+.music-list-container {
+    padding-top: 6.5vh;
+}
+
+.music-item {
+    width: 85%;
+    margin-left: 5%;
+    padding: 1.5em;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.music-item:hover {
+    background-color: rgba(90, 90, 90, 0.5);
+}
+
+.item-title {
+    color: #ffffff;
+    font-size: 24px;
+    /* margin: 3px; */
+}
+
+.item-title-link {
+    text-decoration: none;
+}
+
+.download-button {
+    margin-left: 40vw;
+}

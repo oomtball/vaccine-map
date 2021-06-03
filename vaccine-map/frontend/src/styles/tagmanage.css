@@ -1,0 +1,25 @@
+.tagmanage-bgcolor
+{
+    width:15%;
+    height:635px;
+    background-color:#fcd29f;
+    float: left;
+    margin-right: 16px;
+}
+.clear
+{
+    clear: both;
+}
+
+.tagmanage-root
+{
+    padding: 0 0 0;
+    position: relative;
+}
+
+.tagmanage-button
+{
+    margin: 50 px;
+
+
+}

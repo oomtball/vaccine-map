@@ -1,0 +1,237 @@
+.item_search {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.item_search-screen {
+    width: 100%;
+    /* max-height: 70vh; */
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid orange; */
+}
+
+.item_search-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-left: 1em;
+    padding-top: 3vh;
+}
+
+.sub-actions {
+    width: 20%;
+    /* border: 1px solid orange; */
+    display: flex;
+    justify-content: center;
+}
+
+.item_search-state {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid orange; */
+    padding-top: 3vh;
+}
+
+.item_search-input-container {
+    width: 100%;
+    height: auto;
+    /* border: 2px transparent;
+    padding: 1em; */
+    background-color: transparent;
+    margin-top: 3vh;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.input-subcontainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.item_search-input-title {
+    width: 25%;
+    height: 7vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0.6em;
+    color: #ffffff;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    border: 1px transparent;
+    font-size: 20px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+.item_search-input-content {
+    width: 25%;
+    height: 30vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0.6em;
+    color: #ffffff;
+    margin-top: 2vh;
+    margin-bottom: 3vh;
+    border: 1px transparent;
+    font-size: 20px;
+    padding: 1vw;
+}
+
+.item_search-description {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.upload-button {
+    color: white;
+    width: 26.5%;
+    height: 55vh;
+    background-color: rgb(78, 78, 78);
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.newPostButton {
+    float: right;
+    color: #ffffff;
+    width: 5vw;
+    height: 5vh;
+    line-height: 4.5vh;
+    background-color: rgb(78, 78, 78);
+    margin-right: 19px;
+    border-radius: 0.4em 0.4em 0.4em 0.4em;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.newPostButton:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.spinning {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item_search-block
+{
+    float: left;
+}   
+
+
+.item_search-cl
+{
+   margin-left: 0%;
+    /* text-align: center; */
+    /* line-height: 80px; */
+}
+.item_search-cl2
+{
+   margin-left: 0%;
+   margin-top: -12px;
+    /* text-align: center; */
+    /* line-height: 80px; */
+}
+
+.item_search-root
+{
+    padding: 0 0 0;
+    position: relative;
+  
+}
+
+.item_search-bgcolor
+{
+    width:5%;
+    height:775px;
+    background-color:#fcd29f;
+    float: left;
+    margin-right: 16px;
+}
+.clear
+{
+    clear: both;
+}
+
+.item_search-buttongroup
+{
+    margin-left:30%;
+    margin-top: 10px;    
+}
+
+.mid-line
+{   
+    width:5px;
+    height:775px;
+    background-color:rgba(127, 206, 205, 1);
+    float: left;
+    margin-left: 16px;
+}
+.overflow-scrolling
+{
+    overflow-y: scroll;
+    background-color:#fcd29f;
+    width:flex;
+    height:775px;
+}
+.itemBlock
+{
+    margin-left: 63px;
+    width:600px;
+    height:200px;
+    background-color:rgb(250, 218, 189);
+}
+
+.support-font
+{
+    line-height: 82px;
+
+}
+
+.item_manage-buttongroup
+{
+    margin-left:24%;
+    margin-top: 75px;    
+}
+.item_search-tables
+{   
+    margin-top: 200px;
+    padding:0;
+}
+.moreInfoPic {
+    width: 40%;
+    height: 50%;
+    margin-top: 15px;
+    margin-left: 12px;
+    margin-right: 12px;
+    float: left;
+}
+.morePictures {
+    width: 50%;
+    height: 50%;
+    margin-top: 15px;
+    margin-left: 12px;
+    margin-right: 12px;
+    float: left;
+}

@@ -1,0 +1,61 @@
+export const trNeiwan=[
+    {
+        value:' ',
+        label:'',
+    },
+    {
+        value:'新竹',
+        label:'新竹',
+    },
+    {
+        value:'北新竹',
+        label:'北新竹',
+    },
+    {
+        value:'千甲',
+        label:'千甲',
+    },
+    {
+        value:'新莊',
+        label:'新莊',
+    },
+    {
+        value:'竹中',
+        label:'竹中',
+    },
+    {
+        value:'上員',
+        label:'上員',
+    },
+    {
+        value:'榮華',
+        label:'榮華',
+    },
+    {
+        value:'竹東',
+        label:'竹東',
+    },
+    {
+        value:'橫山',
+        label:'橫山',
+    },
+    {
+        value:'九讚頭',
+        label:'九讚頭',
+    },
+    {
+        value:'合興',
+        label:'合興',
+    },
+    {
+        value:'富貴',
+        label:'富貴',
+    },
+    {
+        value:'內灣',
+        label:'內灣',
+    },
+
+
+
+]
