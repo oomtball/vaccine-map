@@ -3,7 +3,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { withRouter, BrowserRouter } from "react-router-dom";
 import Homepage from './containers/homepage';
 import Login from './containers/login';
-import Register from './containers/register';
 import './styles/login.css';
 
 class App extends Component {

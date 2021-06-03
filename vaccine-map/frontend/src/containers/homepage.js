@@ -3,7 +3,6 @@ import { NavLink, Switch, Route } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -20,17 +19,11 @@ import Fab from '@material-ui/core/Fab';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import tagmanage from './tagmanage'
-import Item_search from './item_search';
-import Item_manage from './item_manage';
+import Distribution from './distribution';
+import Map_page from './map_page';
 import Item_modify from'./item_modify';
-import AgentProfile from './agentProfile';
-import new_item from './new_item';
-import Mymusic from './mymusic';
+import Vaccination from './vaccination';
 import Home from './home';
-import Agent_manage from './agent_manage';
-import AddAgent from './addAgent';
-import PDFModel from './PDFModel';
 import '../styles/homepage.css';
 import '../styles/drawer.css';
 
@@ -64,90 +57,27 @@ export default class Homepage extends Component {
                     <ListItemText primary="首頁"/>
               </ListItem>
             </NavLink>
-            <NavLink to="/item_search" className="drawer_link">
+            <NavLink to="/distribution" className="drawer_link">
               <ListItem button>
                 <ListItemIcon style={{ color: '#fcd29f' }}><MusicIcon /></ListItemIcon>
-                <ListItemText primary="物件搜尋"/>
+                <ListItemText primary="地區疫苗分配現況"/>
               </ListItem>
             </NavLink>
-            <NavLink to="/mymusic" className="drawer_link">
+            <NavLink to="/vaccination" className="drawer_link">
               <ListItem button>
                 <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
-                <ListItemText primary="謄本搜尋"/>
+                <ListItemText primary="地區疫苗接種現況"/>
+              </ListItem>
+            </NavLink>
+            <NavLink to="/map_page" className="drawer_link">
+              <ListItem button>
+                <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
+                <ListItemText primary="彙整疫苗地圖"/>
               </ListItem>
             </NavLink>
             
-            
           </List>
-          <Divider />
-          <List style={{ backgroundColor: 'rgba(35, 150, 127, 0.4)' }}>
-            <NavLink to="/item_manage" className="drawer_link">
-              <ListItem button>
-                <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
-                <ListItemText primary="物件管理"/>
-              </ListItem>
-            </NavLink>
-            <NavLink to="/new_item" className="drawer_link">
-              <ListItem button>
-                <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
-                <ListItemText primary="新增物件"/>
-              </ListItem>
-            </NavLink>
-            {/* <NavLink to="/tagmanage" className="drawer_link">
-              <ListItem button>
-                <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
-                <ListItemText primary="資料標籤管理"/>
-              </ListItem>
-            </NavLink> */}
-            <NavLink to="/agent_manage" className="drawer_link">
-              <ListItem button>
-                <ListItemIcon style={{ color: '#fcd29f' }}><PersonIcon /></ListItemIcon>
-                <ListItemText primary="經紀人管理"/>
-              </ListItem>
-            </NavLink>            
-            <NavLink to="/login" className="drawer_link">
-              <ListItem button onClick={this.props.logout}>
-                <ListItemIcon style={{ color: '#fcd29f' }}><LogoutIcon /></ListItemIcon>
-                <ListItemText primary="登出"/>
-              </ListItem>
-            </NavLink>
-          </List>
-        </div>
-    )
-    sideList2 = (
-      <div
-          style={{ width: '14vw', minHeight: '100vh', backgroundColor: 'rgba(35, 150, 127, 0.4)', color: '#ffffff' }}
-          role="presentation"
-          onClick={this.toggleDrawer(false)}
-          onKeyDown={this.toggleDrawer(false)}
-        >
-          <List style={{ backgroundColor: 'rgba(35, 150, 127, 0.4)' }}>
-            <NavLink to="/home" className="drawer_link">
-              <ListItem button>
-                    <ListItemIcon style={{ color: '#fcd29f' }}><HomeIcon /></ListItemIcon>
-                    <ListItemText primary="首頁"/>
-              </ListItem>
-            </NavLink>
-            <NavLink to="/item_search" className="drawer_link">
-              <ListItem button>
-                <ListItemIcon style={{ color: '#fcd29f' }}><MusicIcon /></ListItemIcon>
-                <ListItemText primary="物件搜尋"/>
-              </ListItem>
-            </NavLink>
-            <NavLink to="/mymusic" className="drawer_link">
-              <ListItem button>
-                <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
-                <ListItemText primary="謄本搜尋"/>
-              </ListItem>
-            </NavLink> 
-            <NavLink to="/login" className="drawer_link">
-              <ListItem button onClick={this.props.logout}>
-                <ListItemIcon style={{ color: '#fcd29f' }}><LogoutIcon /></ListItemIcon>
-                <ListItemText primary="登出"/>
-              </ListItem>
-            </NavLink>
-          </List>
-          <Divider />
+
         </div>
     )
 
@@ -166,8 +96,7 @@ export default class Homepage extends Component {
           this.props.logout()
         }
         var result = ""
-        if (localStorage.title === "業務員"){result = this.sideList2}
-        else {result = this.sideList}
+        result = this.sideList
         return (
             <div className="bg-container">
                 <div style={{ position: 'relative' }}>
@@ -184,7 +113,7 @@ export default class Homepage extends Component {
                                 </Drawer>
                             </div>
                             <div className="homepage-title">
-                                <h1 style={{ marginLeft: '2vw' }}><NavLink className="nav_title" to="/home">中信房屋樹林冠軍團隊</NavLink></h1>
+                                <h1 style={{ marginLeft: '2vw' }}><NavLink className="nav_title" to="/home">台灣疫苗地圖</NavLink></h1>
                             </div>
                             <div className="homepage-fab">
                                 <Fab onClick={this.handleToggle}
@@ -207,20 +136,14 @@ export default class Homepage extends Component {
                     <section className="homepage-section">
                         <Switch>
                             <Route exact path="/home" component={Home} />
-                            <Route path="/item_search" component={Item_search} />
-                            <Route exact path="/item_manage" component={Item_manage}/>
-                            <Route path="/tagmanage" component={tagmanage} />
-                            <Route path="/new_item" component={new_item}/>
-                            <Route path="/item_manage/:contractNum" component={Item_modify}/>
-                            <Route path="/mymusic" component={Mymusic}/>
-                            <Route path="/agent_manage" component = {Agent_manage}/>
-                            <Route path="/agentProfile" component = {AgentProfile}/>
-                            <Route path="addAgent" component ={AddAgent}/>
-                            <Route path="/PDFModel" component={PDFModel}/>
+                            <Route path="/distribution" component={Distribution} />
+                            <Route exact path="/map_page" component={Map_page}/>
+                            <Route path="/map_page/:contractNum" component={Item_modify}/>
+                            <Route path="/vaccination" component={Vaccination}/>
                         </Switch>
                     </section>
                     <footer className="homepage-footer">
-                        中信房屋樹林冠軍團隊
+                        台灣疫苗地圖
                     </footer>
                 </div>
             </div>
