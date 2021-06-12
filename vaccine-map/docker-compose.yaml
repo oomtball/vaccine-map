@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    #network_mode: host
+    ports:
+      - "3000:3000"
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "3002:3002"
