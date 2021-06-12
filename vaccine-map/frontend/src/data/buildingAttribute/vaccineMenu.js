@@ -1,0 +1,19 @@
+export const vaccine = [
+    {},
+    {
+        value:'不限',
+        label:'不限',
+    },
+    {
+        value:'COVID-19',
+        label:'COVID-19',
+    },
+    {
+        value:'A肝-1',
+        label:'A肝-1',
+    },
+    {
+        value:'A肝-2',
+        label:'A肝-2',
+    },
+]

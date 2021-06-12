@@ -8,11 +8,10 @@ import {city2} from '../data/buildingAttribute/cityMenu2';
 import PrintIcon from '@material-ui/icons/Print';
 
 
-import {house} from '../data/buildingAttribute/houseMenu';
+import {vaccine} from '../data/buildingAttribute/vaccineMenu';
 import {sale_stat} from '../data/sale-statMenu';
 
 import {salesperson} from '../data/salespersonMenu';
-import {park} from '../data/buildingAttribute/parkMenu';
 
 import GridType1 from '../components/gridType1';
 import GridType2 from '../components/gridType2';
@@ -59,59 +58,49 @@ export default class Item_search extends Component {
     constructor(props) {
         super(props);
         if (props.location.aboutProps !== undefined){
-            this.state = {city:"", district:"", road:"", houseType:"", mrtStation:"",
-            saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
-            pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
-            houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
-            park:"", tableBack:"", rightStatus:"resulting", dataFromdb1:[], patternFromDb:[]};
+            this.state = {city:"", district:"", road:"", vaccineType:""
+            , tableBack:"", rightStatus:"resulting", dataFromdb1:[], patternFromDb:[]};
         }
         else{
-            this.state = {city:"", district:"", road:"", houseType:"", mrtStation:"",
-            saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
-            pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
-            houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
-            park:"", tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]};
+            this.state = {city:"", district:"", road:"", vaccineType:"", 
+            tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]};
         }
     }
     clear = () => {
-        this.setState({ city:"", district:"", road:"", houseType:"", mrtStation:"",
-            saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
-            pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
-            houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
-            park:"", tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]});
+        this.setState({ city:"", district:"", road:"", vaccineType:"",
+        tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]});
     }
-    
-    findObjectsForSearching = async () => {
-        let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, houseType:this.state.houseType
-        ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
-        totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
-        pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
-        landHolding2:this.state.landHolding2, houseAge:this.state.houseAge, houseAge2:this.state.houseAge2, floor:this.state.floor,
-        floor2:this.state.floor2, pattern:this.state.pattern, pattern2:this.state.pattern2,
-        park:this.state.park};
-        console.log(this.state.district);
-        await fetch("http://localhost:3002/api/findSomeObjects", {
-            method: 'POST',
-            body: JSON.stringify(objectSearched),
-            headers: {
-                'Content-Type': 'application/json'
-        }})
-        .then(res => { return res.json() })
-        .then(originData => {
-            if(originData.success) {
-                if(originData.data) {
-                    originData.data.reverse();
-                    this.setState(() => ({ dataFromdb1: originData.data }));
-                }
-                else {
-                    this.setState(() => ({ dataFromdb1: [] }));
-                }
-            }
-            else
-                alert('Fail.');
-        })
-        .catch((err) => console.error(err));
-    }
+    // findObjectsForSearching = async () => {
+    //     let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
+    //     ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
+    //     totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
+    //     pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
+    //     landHolding2:this.state.landHolding2, houseAge:this.state.houseAge, houseAge2:this.state.houseAge2, floor:this.state.floor,
+    //     floor2:this.state.floor2, pattern:this.state.pattern, pattern2:this.state.pattern2,
+    //     park:this.state.park};
+    //     console.log(this.state.district);
+    //     await fetch("http://localhost:3002/api/findSomeObjects", {
+    //         method: 'POST',
+    //         body: JSON.stringify(objectSearched),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //     }})
+    //     .then(res => { return res.json() })
+    //     .then(originData => {
+    //         if(originData.success) {
+    //             if(originData.data) {
+    //                 originData.data.reverse();
+    //                 this.setState(() => ({ dataFromdb1: originData.data }));
+    //             }
+    //             else {
+    //                 this.setState(() => ({ dataFromdb1: [] }));
+    //             }
+    //         }
+    //         else
+    //             alert('Fail.');
+    //     })
+    //     .catch((err) => console.error(err));
+    // }
     
     edit = key => e => {
         if(key === 'city')
@@ -120,64 +109,13 @@ export default class Item_search extends Component {
             this.setState({ district: e });
         else if (key === 'road')
             this.setState({ road: e });
-        else if (key === 'houseType')
-            this.setState({ houseType: e });
-        else if (key === 'mrtStation')
-            this.setState({ mrtStation: e });
-        else if (key === 'saleStatus')
-            this.setState({ saleStatus: e });
-        else if (key === 'salesperson')
-            this.setState({ salesperson: e });
-        else if (key === 'number')
-            this.setState({ number: e });
-        else if (key === 'totalPrice')
-            this.setState({ totalPrice: e });
-        else if (key === 'totalPrice2')
-            this.setState({ totalPrice2: e });
-        else if (key === 'pricePerPing')
-            this.setState({ pricePerPing: e });
-        else if (key === 'pricePerPing2')
-            this.setState({ pricePerPing2: e });
-        else if (key === 'ping')
-            this.setState({ ping: e });
-        else if (key === 'ping2')
-            this.setState({ ping2: e });
-        else if (key === 'landHolding')
-            this.setState({ landHolding: e });
-        else if (key === 'landHolding2')
-            this.setState({ landHolding2: e });
-        else if (key === 'houseAge')
-            this.setState({ houseAge: e });
-        else if (key === 'houseAge2')
-            this.setState({ houseAge2: e });
-        else if (key === 'floor')
-            this.setState({ floor: e });
-        else if (key === 'floor2')
-            this.setState({ floor2: e });
-        else if (key === 'pattern')
-            this.setState({ pattern: e });
-        else if (key === 'pattern2')
-            this.setState({ pattern2: e });
-        else if (key === 'park')
-            this.setState({ park: e });
+        else if (key === 'vaccineType')
+            this.setState({ vaccineType: e });
         else if (key === 'tableBack'){
             this.setState({ tableBack: e });
             this.setState({ rightStatus: "resulting"});
         }
     }
-    
-    Viewing_PDF = () =>{
-        // window.open('http://localhost:3000/PDFModel');
-        axios.post('http://localhost:3002/api/create-pdf', this.state.tableBack)
-        .then(() => axios.get('http://localhost:3002/api/fetch-pdf', { responseType:'blob'}))
-        .then((res) => {
-            const pdfBlob = new Blob([res.data], {type:'application/pdf'});
-        
-            saveAs(pdfBlob, `${this.state.tableBack.innerNum}.pdf`);
-        }) 
-    }
-
-
     
     render(){ 
         var district = [{}];
@@ -248,99 +186,67 @@ export default class Item_search extends Component {
         else if (this.state.city === "連江縣"){
             district = lianjiangCounty;
         }
-        
-    
-    
-        
-    
-    
-   
-        var searchingBlock = () => {
-        return(<div><form style = {{display: 'inline', flexWrap: 'wrap', float: 'left', height:"775px",}} noValidate autoComplete="off">
-        <br></br>
-        <div className="item_search-cl">
-            <GridType1
-            id="city"
-            label="城市區域"
-            helperText=""
-            choices={city2}
-            value={this.state.city}
-            changeFunc={this.edit("city")}
-            width = {100}
-            />
-            <GridType1
-            id="district"
-            label="行政區"
-            helperText=""
-            choices={district}
-            value={this.state.district}
-            changeFunc={this.edit("district")}
-            width = {100}
-            />
-            <GridType2
-            id="road"
-            label="路段"
-            value={this.state.road}
-            changeFunc={this.edit("road")}
-            width= {217}
-            />            
-        </div> 
-        <div className="item_search-cl">
-            <GridType1
-            id="houseType"
-            label="房屋種類"
-            helperText=""
-            choices={house}
-            value={this.state.houseType}
-            changeFunc={this.edit("houseType")}
-            width={100}
-            />
-            <GridType1
-            id="mrtStation"
-            label="捷運站"
-            helperText=""
-            choices={mrtLine}
-            value={this.state.mrtStation}
-            changeFunc={this.edit("mrtStation")}
-            width={100}
-            />
-            <GridType1
-            id="saleStatus"
-            label="出售現狀"
-            helperText=""
-            choices={sale_stat}
-            value={this.state.saleStatus}
-            changeFunc={this.edit("saleStatus")}
-            width={100}
-            />
-            <GridType1
-            id="salesperson"
-            label="經紀人"
-            helperText=""
-            choices={salesperson}
-            value={this.state.salesperson}
-            changeFunc={this.edit("salesperson")}
-            width={100}
-            />
-        </div>
-        <div>
-            <Grid item className="item_search-buttongroup">
-                <ButtonGroup
-                variant="contained"
-                color = ""
-                aria-label="full-width contained primary button group"
-                size="large"
-                style={{marginLeft:'30%',}}
-                >
-                    <BootstrapButton onClick={this.findObjectsForSearching}>搜尋</BootstrapButton>
-                    <BootstrapButton onClick={this.clear}>重置</BootstrapButton>
-                </ButtonGroup>
-            </Grid>
-        
-        
-        </div>
 
-    </form>    </div>)
+        var searchingBlock = () => {
+        return(
+        <div>
+            <form style = {{display: 'inline', flexWrap: 'wrap', float: 'left', height:"775px",}} noValidate autoComplete="off">
+            <br></br>
+            <div className="item_search-cl">
+                <GridType1
+                id="city"
+                label="城市區域"
+                helperText=""
+                choices={city2}
+                value={this.state.city}
+                changeFunc={this.edit("city")}
+                width = {100}
+                />
+                <GridType1
+                id="district"
+                label="行政區"
+                helperText=""
+                choices={district}
+                value={this.state.district}
+                changeFunc={this.edit("district")}
+                width = {100}
+                />
+                <GridType2
+                id="road"
+                label="路段"
+                value={this.state.road}
+                changeFunc={this.edit("road")}
+                width= {217}
+                />            
+            </div> 
+            <div className="item_search-cl">
+                <GridType1
+                id="vaccineType"
+                label="疫苗種類"
+                helperText=""
+                choices={vaccine}
+                value={this.state.vaccineType}
+                changeFunc={this.edit("vaccineType")}
+                width={100}
+                />
+            </div>
+            <div>
+                <Grid item className="item_search-buttongroup">
+                    <ButtonGroup
+                    variant="contained"
+                    color = ""
+                    aria-label="full-width contained primary button group"
+                    size="large"
+                    style={{marginLeft:'30%',}}
+                    >
+                        <BootstrapButton>搜尋</BootstrapButton>
+                        <BootstrapButton onClick={this.clear}>重置</BootstrapButton>
+                    </ButtonGroup>
+                </Grid>
+            </div>
+        </form>    
+    </div>
+    )
     }
     let temp = ""
     if (this.props.location.aboutProps !== undefined){
@@ -504,11 +410,11 @@ export default class Item_search extends Component {
         </div>
         <div className="mid-line"></div>
         <div>
-            <Switch>
-                {/* <Route path={this.props.match.url} children={listingBlock()}></Route> */}
+            {listingBlock()}
+            {/* <Switch>
                 <Route exact path="/item_search" children={listingBlock()}></Route>
                 <Route path="/item_search/:id" children={resultBlock}></Route>
-            </Switch>
+            </Switch> */}
             {/* {resultBlock} */}
         </div>
         <div className="clear"></div>

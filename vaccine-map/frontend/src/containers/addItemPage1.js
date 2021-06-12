@@ -5,12 +5,6 @@ import {
   } from '@material-ui/pickers';
 import GridType3 from "../components/gridType3";
 import GridType4 from "../components/gridType4";
-import {buildingType1} from '../data/buildingAttribute/buildingType1';
-import {buildingType2_1} from '../data/buildingAttribute/buildingType2_1';
-import {buildingType2_3} from '../data/buildingAttribute/buildingType2_3';
-import {buildingType3_1} from '../data/buildingAttribute/buildingType3_1';
-import {buildingType3_2} from '../data/buildingAttribute/buildingType3_2';
-import {usage} from '../data/usage';
 import {city2} from '../data/buildingAttribute/cityMenu2';
 import {changhuaCounty} from '../data/allDistrict/changhuaCounty';
 import {chiayiCity} from '../data/allDistrict/chiayiCity';
@@ -43,25 +37,7 @@ import '../styles/new_item.css'
 
 export default class AddItemPage1 extends Component {
     render() {
-        var buildingType2 = [{}];
-        var buildingType3 = [{}];
         var district = [{}];
-
-        if (this.props.buildingType1 === "成屋" || this.props.buildingType1 === "預售"){
-            buildingType2 = buildingType2_1;
-        }
-        else if (this.props.buildingType1 === "土地"){
-            buildingType2 = buildingType2_3;
-        }
-        if (this.props.buildingType2 === "住宅"){
-            buildingType3 = buildingType3_1;
-        }
-        else if (this.props.buildingType2 === "商用"){
-            buildingType3 = buildingType3_2;
-        }
-
-        //
-
         if (this.props.city === "臺北市"){
             district = taipeiCity;
         }
@@ -133,115 +109,43 @@ export default class AddItemPage1 extends Component {
         <div >
             <div className="new_item-basic">
                 <GridType3
-                label="物件案名"
-                value={this.props.caseName}
-                changeFunc={this.props.changeFunc("caseName")}
+                label="施打者姓名"
+                value={this.props.user_name}
+                changeFunc={this.props.changeFunc("user_name")}
                 ifRequired ={true}
                 width = {200}     
                 />
                  <GridType3
-                label="內部編號"
-                value={this.props.innerNum}
-                changeFunc={this.props.changeFunc("innerNum")}
+                label="身分證"
+                value={this.props.user_id}
+                changeFunc={this.props.changeFunc("user_id")}
                 width = {110}     
                 ifRequired = {true}
                 />
-                
-                <GridType3
-                label="委託契約編號"
-                value={this.props.contractNum}
-                changeFunc={this.props.changeFunc("contractNum")}
+                 <GridType3
+                label="性別"
+                value={this.props.gender}
+                changeFunc={this.props.changeFunc("gender")}
                 width = {110}     
                 ifRequired = {true}
                 />
-                <GridType3
-                label="委託售價"
-                value={this.props.contractPrice}
-                changeFunc={this.props.changeFunc("contractPrice")}
-                width = {110}     
-                ifRequired = {true}
-                />
-                <nobr className="support-font">萬</nobr>
-                <GridType3
-                label="降價售價"
-                value={this.props.sellingPrice}
-                changeFunc={this.props.changeFunc("sellingPrice")}
-                width = {110}     
-                ifRequired = {false}
-                />
-                <nobr className="support-font">萬</nobr>
-                
-                
-                
-                <GridType4
-                id="物件型態"
-                label="物件型態"
-                helperText=""
-                choices={buildingType1}
-                value={this.props.buildingType}
-                changeFunc={this.props.changeFunc("buildingType")}
-                width = {110}
-                ifRequired = {true}
-                />
-               
-               
             </div>
-            <div  className='new_item-dateselection'> 
-                <GridType4
-                id="使用用途"
-                label="使用用途"
-                helperText=""
-                choices={usage}
-                value={this.props.usage}
-                changeFunc={this.props.changeFunc("usage")}
-                width = {125}
-                ifRequired = {true}
-                />        
-                
+            <div  className='new_item-dateselection'>       
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
                         margin="normal"
                         style={{marginLeft:"30px"}}
                         id="date-picker-dialog"
-                        label="委託起始日期"
+                        label="生日"
                         format="MM/dd/yyyy"
-                        value={this.props.caseStartDate}
-                        onChange={this.props.changeFunc("caseStartDate")}
+                        value={this.props.birthday}
+                        onChange={this.props.changeFunc("birthday")}
                         KeyboardButtonProps={{
                         'aria-label': 'change date',
                        
                     }}
                     />                    
-                </MuiPickersUtilsProvider>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        margin="normal"
-                        style={{marginLeft:"30px"}}
-                        id="date-picker-dialog"
-                        label="委託終止日期"
-                        format="MM/dd/yyyy"
-                        value={this.props.caseFinishDate}
-                        onChange={this.props.changeFunc("caseFinishDate")}
-                        KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
-                    />                    
-               
-                </MuiPickersUtilsProvider>
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <KeyboardDatePicker
-                        margin="normal"
-                        style={{marginLeft:"30px"}}
-                        id="date-picker-dialog"
-                        label="建築完工日"
-                        format="MM/dd/yyyy"
-                        value={this.props.constructFinishDate}
-                        onChange={this.props.changeFunc("constructFinishDate")}
-                        KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                    }}
-                    />                    
-                </MuiPickersUtilsProvider>        
+                </MuiPickersUtilsProvider>      
             </div>
             <div className='new_item-address'>  
                 <GridType4
@@ -339,41 +243,44 @@ export default class AddItemPage1 extends Component {
                 changeFunc={this.props.changeFunc("floor2")}
                 width = {50}     
                 />
-                <nobr className="support-font">      建物總樓層 地上</nobr>
-                <GridType3
-                label=""
-                value={this.props.allUpFloor}
-                changeFunc={this.props.changeFunc("allUpFloor")}
-                width = {50}     
-                ifRequired = {true}
-                />
-                <nobr className="support-font">層</nobr>
-                <nobr className="support-font"> 地下</nobr>
-                <GridType3
-                label=""
-                value={this.props.allDownFloor}
-                changeFunc={this.props.changeFunc("allDownFloor")}
-                width = {50}     
-                ifRequired = {true}
-                />
-                <nobr className="support-font">層</nobr>
-                <GridType4
-                id="saleStatus"
-                label="出售現狀"
-                helperText=""
-                choices={sale_stat}
-                value={this.props.saleStatus}
-                changeFunc={this.props.changeFunc("saleStatus")}
-                width={100}
-                ifRequired = {true}
-                />  
             </div>
-            
-                
-                
-         
-            
-            
+            <div className="new_item-basic">
+                <GridType3
+                label="疫苗名稱"
+                value={this.props.vaccine_name}
+                changeFunc={this.props.changeFunc("vaccine_name")}
+                ifRequired ={true}
+                width = {200}     
+                />
+                 <GridType3
+                label="疫苗編號"
+                value={this.props.vaccine_id}
+                changeFunc={this.props.changeFunc("vaccine_id")}
+                width = {110}     
+                ifRequired = {true}
+                />
+                 <GridType3
+                label="疫苗出產資訊"
+                value={this.props.vaccine_info}
+                changeFunc={this.props.changeFunc("vaccine_info")}
+                width = {200}     
+                ifRequired = {true}
+                />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <KeyboardDatePicker
+                        margin="normal"
+                        style={{marginLeft:"30px"}}
+                        id="date-picker-dialog"
+                        label="施打日期"
+                        format="MM/dd/yyyy"
+                        value={this.props.vaccination_date}
+                        onChange={this.props.changeFunc("vaccination_date")}
+                        KeyboardButtonProps={{
+                        'aria-label': 'change date',  
+                        }}
+                    />                    
+                </MuiPickersUtilsProvider> 
+            </div>
         </div>
         );
     }

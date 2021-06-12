@@ -67,7 +67,7 @@ export default class Homepage extends Component {
             <NavLink to="/vaccination" className="drawer_link">
               <ListItem button>
                 <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
-                <ListItemText primary="地區疫苗接種現況"/>
+                <ListItemText primary="地區人口疫苗接種現況"/>
               </ListItem>
             </NavLink>
             <NavLink to="/map_page" className="drawer_link">

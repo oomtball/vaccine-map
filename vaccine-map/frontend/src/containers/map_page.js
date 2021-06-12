@@ -8,7 +8,7 @@ import {city2} from '../data/buildingAttribute/cityMenu2';
 import PrintIcon from '@material-ui/icons/Print';
 
 
-import {house} from '../data/buildingAttribute/houseMenu';
+import {vaccine} from '../data/buildingAttribute/vaccineMenu';
 import {sale_stat} from '../data/sale-statMenu';
 
 import {salesperson} from '../data/salespersonMenu';
@@ -59,14 +59,14 @@ export default class Item_search extends Component {
     constructor(props) {
         super(props);
         if (props.location.aboutProps !== undefined){
-            this.state = {city:"", district:"", road:"", houseType:"", mrtStation:"",
+            this.state = {city:"", district:"", road:"", vaccineType:"", mrtStation:"",
             saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
             pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
             houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
             park:"", tableBack:"", rightStatus:"resulting", dataFromdb1:[], patternFromDb:[]};
         }
         else{
-            this.state = {city:"", district:"", road:"", houseType:"", mrtStation:"",
+            this.state = {city:"", district:"", road:"", vaccineType:"", mrtStation:"",
             saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
             pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
             houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
@@ -74,7 +74,7 @@ export default class Item_search extends Component {
         }
     }
     clear = () => {
-        this.setState({ city:"", district:"", road:"", houseType:"", mrtStation:"",
+        this.setState({ city:"", district:"", road:"", vaccineType:"", mrtStation:"",
             saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
             pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
             houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
@@ -82,7 +82,7 @@ export default class Item_search extends Component {
     }
     
     findObjectsForSearching = async () => {
-        let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, houseType:this.state.houseType
+        let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
         ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
         totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
         pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
@@ -120,8 +120,8 @@ export default class Item_search extends Component {
             this.setState({ district: e });
         else if (key === 'road')
             this.setState({ road: e });
-        else if (key === 'houseType')
-            this.setState({ houseType: e });
+        else if (key === 'vaccineType')
+            this.setState({ vaccineType: e });
         else if (key === 'mrtStation')
             this.setState({ mrtStation: e });
         else if (key === 'saleStatus')
@@ -287,12 +287,12 @@ export default class Item_search extends Component {
         </div> 
         <div className="item_search-cl">
             <GridType1
-            id="houseType"
+            id="vaccineType"
             label="房屋種類"
             helperText=""
-            choices={house}
-            value={this.state.houseType}
-            changeFunc={this.edit("houseType")}
+            choices={vaccine}
+            value={this.state.vaccineType}
+            changeFunc={this.edit("vaccineType")}
             width={100}
             />
             <GridType1
@@ -499,18 +499,6 @@ export default class Item_search extends Component {
     return (
     <div className="item_search-root">
         <div className="item_search-bgcolor"></div>
-        <div>
-            {searchingBlock()}
-        </div>
-        <div className="mid-line"></div>
-        <div>
-            <Switch>
-                {/* <Route path={this.props.match.url} children={listingBlock()}></Route> */}
-                <Route exact path="/item_search" children={listingBlock()}></Route>
-                <Route path="/item_search/:id" children={resultBlock}></Route>
-            </Switch>
-            {/* {resultBlock} */}
-        </div>
         <div className="clear"></div>
     </div>
     );

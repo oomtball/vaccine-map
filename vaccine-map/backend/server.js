@@ -324,17 +324,18 @@ router.post("/findSomeAgents/", (req, res) => {
 });
 
 router.post("/findSomeObjects/", (req, res) => {
-  const {city, district, road, houseType, mrtStation,
+  const {city, district, road, vaccineType, mrtStation,
     saleStatus, salesperson, number, totalPrice, totalPrice2,
     pricePerPing, pricePerPing2, ping, ping2, landHolding, landHolding2,
     houseAge, houseAge2, floor, floor2, pattern, pattern2,
     park} = req.body;
+    console.log(req.body)
     var a = {}
     console.log(landHolding, landHolding2);
     if (city !== "") {a.city = city}
     if (district !== "") {a.district = district}
     if (road !== "") {a.road1 = new RegExp(road)}
-    if (houseType !== "") {a.buildingType3 = houseType}
+    if (vaccineType !== "") {a.vaccineType = vaccineType}
     if (mrtStation !== "") {a.mrtRoute1 = mrtStation}
     if (salesperson !== "") {a.agency1 = salesperson}
     if (number !== "") {a.innerNum = number}

@@ -54,10 +54,10 @@ export default function CustomizedTables(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <StyledTableCell>縣市</StyledTableCell>
-            <StyledTableCell align="left">鄉鎮</StyledTableCell>
-            <StyledTableCell align="left">疫苗名稱</StyledTableCell>
-            <StyledTableCell align="left">剩餘數量</StyledTableCell>
+            <StyledTableCell>接種編號</StyledTableCell>
+            <StyledTableCell align="left">接種人姓名</StyledTableCell>
+            <StyledTableCell align="left">已接種</StyledTableCell>
+            <StyledTableCell align="left">接種編號</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

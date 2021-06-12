@@ -8,12 +8,7 @@ import {city2} from '../data/buildingAttribute/cityMenu2';
 import PrintIcon from '@material-ui/icons/Print';
 
 
-import {house} from '../data/buildingAttribute/houseMenu';
-import {sale_stat} from '../data/sale-statMenu';
-
-import {salesperson} from '../data/salespersonMenu';
-import {park} from '../data/buildingAttribute/parkMenu';
-
+import {vaccine} from '../data/buildingAttribute/vaccineMenu';
 import GridType1 from '../components/gridType1';
 import GridType2 from '../components/gridType2';
 
@@ -21,7 +16,7 @@ import {BootstrapButton} from './BootstrapButton';
 import OverflowScrolling from 'react-overflow-scrolling';
 import Grid from '@material-ui/core/Grid';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import CustomizedTables from '../components/CustomizedTables'
+import CustomizedTables2 from '../components/CustomizedTables2'
 
 import {changhuaCounty} from '../data/allDistrict/changhuaCounty';
 import {chiayiCity} from '../data/allDistrict/chiayiCity';
@@ -59,14 +54,14 @@ export default class Item_search extends Component {
     constructor(props) {
         super(props);
         if (props.location.aboutProps !== undefined){
-            this.state = {city:"", district:"", road:"", houseType:"", mrtStation:"",
+            this.state = {city:"", district:"", road:"", vaccineType:"", mrtStation:"",
             saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
             pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
             houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
             park:"", tableBack:"", rightStatus:"resulting", dataFromdb1:[], patternFromDb:[]};
         }
         else{
-            this.state = {city:"", district:"", road:"", houseType:"", mrtStation:"",
+            this.state = {city:"", district:"", road:"", vaccineType:"", mrtStation:"",
             saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
             pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
             houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
@@ -74,7 +69,7 @@ export default class Item_search extends Component {
         }
     }
     clear = () => {
-        this.setState({ city:"", district:"", road:"", houseType:"", mrtStation:"",
+        this.setState({ city:"", district:"", road:"", vaccineType:"", mrtStation:"",
             saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
             pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
             houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
@@ -82,7 +77,7 @@ export default class Item_search extends Component {
     }
     
     findObjectsForSearching = async () => {
-        let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, houseType:this.state.houseType
+        let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
         ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
         totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
         pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
@@ -120,8 +115,8 @@ export default class Item_search extends Component {
             this.setState({ district: e });
         else if (key === 'road')
             this.setState({ road: e });
-        else if (key === 'houseType')
-            this.setState({ houseType: e });
+        else if (key === 'vaccineType')
+            this.setState({ vaccineType: e });
         else if (key === 'mrtStation')
             this.setState({ mrtStation: e });
         else if (key === 'saleStatus')
@@ -248,14 +243,8 @@ export default class Item_search extends Component {
         else if (this.state.city === "連江縣"){
             district = lianjiangCounty;
         }
-        
-    
-    
-        
-    
-    
    
-        var searchingBlock = () => {
+    var searchingBlock = () => {
         return(<div><form style = {{display: 'inline', flexWrap: 'wrap', float: 'left', height:"775px",}} noValidate autoComplete="off">
         <br></br>
         <div className="item_search-cl">
@@ -287,42 +276,35 @@ export default class Item_search extends Component {
         </div> 
         <div className="item_search-cl">
             <GridType1
-            id="houseType"
-            label="房屋種類"
+            id="vaccine_name"
+            label="疫苗名稱"
             helperText=""
-            choices={house}
-            value={this.state.houseType}
-            changeFunc={this.edit("houseType")}
-            width={100}
-            />
-            <GridType1
-            id="mrtStation"
-            label="捷運站"
-            helperText=""
-            choices={mrtLine}
-            value={this.state.mrtStation}
-            changeFunc={this.edit("mrtStation")}
-            width={100}
-            />
-            <GridType1
-            id="saleStatus"
-            label="出售現狀"
-            helperText=""
-            choices={sale_stat}
-            value={this.state.saleStatus}
-            changeFunc={this.edit("saleStatus")}
-            width={100}
-            />
-            <GridType1
-            id="salesperson"
-            label="經紀人"
-            helperText=""
-            choices={salesperson}
-            value={this.state.salesperson}
-            changeFunc={this.edit("salesperson")}
+            choices={vaccine}
+            value={this.state.vaccineType}
+            changeFunc={this.edit("vaccineType")}
             width={100}
             />
         </div>
+		<div className="item_search-cl">
+            <GridType1
+            id="name"
+            label="姓名"
+            helperText=""
+            choices={city2}
+            value={this.state.city}
+            changeFunc={this.edit("city")}
+            width = {100}
+            />
+            <GridType1
+            id="ID"
+            label="身分證"
+            helperText=""
+            choices={district}
+            value={this.state.district}
+            changeFunc={this.edit("district")}
+            width = {100}
+            />          
+        </div> 
         <div>
             <Grid item className="item_search-buttongroup">
                 <ButtonGroup
@@ -336,8 +318,6 @@ export default class Item_search extends Component {
                     <BootstrapButton onClick={this.clear}>重置</BootstrapButton>
                 </ButtonGroup>
             </Grid>
-        
-        
         </div>
 
     </form>    </div>)
@@ -351,7 +331,7 @@ export default class Item_search extends Component {
     }
     var listingBlock = () => {
         return (<div><OverflowScrolling className='overflow-scrolling'>
-        <CustomizedTables getItemInfo = {this.edit("tableBack")} dataFromdb1 = {this.state.dataFromdb1}></CustomizedTables>
+        <CustomizedTables2 getItemInfo = {this.edit("tableBack")} dataFromdb1 = {this.state.dataFromdb1}></CustomizedTables2>
     </OverflowScrolling></div>)
     }
     let address = () => {
@@ -504,11 +484,11 @@ export default class Item_search extends Component {
         </div>
         <div className="mid-line"></div>
         <div>
-            <Switch>
-                {/* <Route path={this.props.match.url} children={listingBlock()}></Route> */}
+			{listingBlock()}
+            {/* <Switch>
                 <Route exact path="/item_search" children={listingBlock()}></Route>
                 <Route path="/item_search/:id" children={resultBlock}></Route>
-            </Switch>
+            </Switch> */}
             {/* {resultBlock} */}
         </div>
         <div className="clear"></div>
