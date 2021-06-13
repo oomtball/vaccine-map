@@ -5,8 +5,12 @@ WORKDIR /home/node/app
 COPY ./package.json .
 RUN npm install
 
-COPY . .
+ENV BACKEND_HOST=localhost
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+ENTRYPOINT ["./entrypoint.sh"]
+
+COPY . .
+RUN rm Dockerfile
+RUN chmod +x entrypoint.sh

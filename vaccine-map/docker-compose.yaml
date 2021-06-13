@@ -3,6 +3,8 @@ services:
   frontend:
     build: ./frontend
     container_name: frontend
+    environment:
+      - BACKEND_HOST=140.112.107.89
     #network_mode: host
     ports:
       - "3000:3000"
