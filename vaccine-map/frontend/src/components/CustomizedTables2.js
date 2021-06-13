@@ -56,21 +56,17 @@ export default function CustomizedTables(props) {
           <TableRow>
             <StyledTableCell>接種編號</StyledTableCell>
             <StyledTableCell align="left">接種人姓名</StyledTableCell>
-            <StyledTableCell align="left">已接種</StyledTableCell>
-            <StyledTableCell align="left">接種編號</StyledTableCell>
+            <StyledTableCell align="left">疫苗名稱</StyledTableCell>
+            <StyledTableCell align="left">疫苗編號</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {props.dataFromdb1.map(row => (
-            <StyledTableRow key={row.caseName}>
-              <NavLink to={"/item_search/"+row.contractNum}>
-                <StyledTableCell component="th" scope="row" onClick={() => handleChange(row)}>
-                  {row.innerNum + row.caseName}
-                </StyledTableCell>
-              </NavLink>
-              <StyledTableCell align="left">{row.contractNum}</StyledTableCell>
-              <StyledTableCell align="left">{row.district + row.road}</StyledTableCell>
-              <StyledTableCell align="left">{row.contractPrice}</StyledTableCell>
+            <StyledTableRow key={row.vaccination_id}>
+              <StyledTableCell align="left">{row.vaccination_id}</StyledTableCell>
+              <StyledTableCell align="left">{row.user_name}</StyledTableCell>
+              <StyledTableCell align="left">{row.vaccine_name}</StyledTableCell>
+              <StyledTableCell align="left">{row.vaccine_id}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

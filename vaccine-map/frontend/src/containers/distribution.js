@@ -1,17 +1,9 @@
 import React, { Component } from "react";
-import Zmage from 'react-zmage'
-import { NavLink, Switch, Route } from "react-router-dom";
 import '../styles/item_search.css';
-import {saveAs} from 'file-saver';
 import axios from 'axios';
 import {city2} from '../data/buildingAttribute/cityMenu2';
-import PrintIcon from '@material-ui/icons/Print';
-
 
 import {vaccine} from '../data/buildingAttribute/vaccineMenu';
-import {sale_stat} from '../data/sale-statMenu';
-
-import {salesperson} from '../data/salespersonMenu';
 
 import GridType1 from '../components/gridType1';
 import GridType2 from '../components/gridType2';
@@ -44,15 +36,6 @@ import {taoyuanCity} from '../data/allDistrict/taoyuanCity';
 import {wuhuCounty} from '../data/allDistrict/wuhuCounty';
 import {yilanCounty} from '../data/allDistrict/yilanCounty';
 import {yunlinCounty} from '../data/allDistrict/yunlinCounty';
-import {mrtLine} from'../data/MRT/mrtLine';
-
-
-
-import pic2 from "./lastPage.png";
-
-import GridType6 from "../components/gridType6"
-import GridType7 from "../components/gridType7"
-
 
 export default class Item_search extends Component {
     constructor(props) {
@@ -63,12 +46,18 @@ export default class Item_search extends Component {
         }
         else{
             this.state = {city:"", district:"", road:"", vaccineType:"", 
-            tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]};
+            tableBack:"", rightStatus:"searching", dataFromdb1:[],
+            patternFromDb:[]};
         }
     }
     clear = () => {
         this.setState({ city:"", district:"", road:"", vaccineType:"",
         tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]});
+    }
+
+    findObjectForSearching = () => {
+        let test_data = [{city:"test_city", district:"test_district", road:"test_road", vaccineType:"A", num:"100"}]
+        this.setState({dataFromdb1 : test_data})
     }
     // findObjectsForSearching = async () => {
     //     let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
@@ -101,7 +90,6 @@ export default class Item_search extends Component {
     //     })
     //     .catch((err) => console.error(err));
     // }
-    
     edit = key => e => {
         if(key === 'city')
             this.setState({ city: e, district: ""});
@@ -239,7 +227,7 @@ export default class Item_search extends Component {
                     size="large"
                     style={{marginLeft:'30%',}}
                     >
-                        <BootstrapButton>搜尋</BootstrapButton>
+                        <BootstrapButton onClick={this.findObjectForSearching}>搜尋</BootstrapButton>
                         <BootstrapButton onClick={this.clear}>重置</BootstrapButton>
                     </ButtonGroup>
                 </Grid>
@@ -260,148 +248,10 @@ export default class Item_search extends Component {
         <CustomizedTables getItemInfo = {this.edit("tableBack")} dataFromdb1 = {this.state.dataFromdb1}></CustomizedTables>
     </OverflowScrolling></div>)
     }
-    let address = () => {
-		var villageCheck = () => {if(temp.village !== ""){return (temp.village)}}
-		var neighborCheck = () => {if(temp.neighbor !== ""){return (temp.neighbor+"鄰")}}
-		var sectionCheck = () => {if(temp.section !== ""){return (temp.section+"段")}}
-		var laneCheck = () => {if(temp.lane !== ""){return (temp.lane+"巷")}}
-		var alleyCheck = () => {if(temp.alley !== ""){return (temp.alley+"弄")}}
-		var numberCheck = () => {if(temp.number1 !== ""){
-            if (temp.number2 !== ""){return(temp.number1+"號之"+temp.number2)}
-            else{return(temp.number1+"號")}
-		}}
-		var floorCheck = () => {if(temp.floor1 !== ""){
-            if (temp.floor2 !== ""){return(temp.floor1+"樓之"+temp.floor2)}
-            else{return(temp.floor1+"樓")}
-		}}
-		if (temp.city !== "" && temp.district !== "" && temp.road !== "" && temp.number1 !== ""){
-			return(<t>{temp.city}{temp.district}{villageCheck()}&nbsp;{neighborCheck()}&nbsp;
-			{temp.road}&nbsp;{sectionCheck()}{laneCheck()}{alleyCheck()}&nbsp;{numberCheck()}&nbsp;{floorCheck()}</t>)
-		}
-    }
-    let patternSummary = () => {
-		var roomCheck = () => {if (temp.room1 !== ""){
-            if (temp.room2 !== ""){return(temp.room1+"+"+temp.room2+"房")}
-            else{return(temp.room1+"房");};
-		}};
-		var livingroomCheck = () => {if (temp.livingroom !== ""){return(temp.livingroom+"廳");}};
-		var bathroomCheck = () => {if (temp.bathroom !== ""){return(temp.bathroom+"衛");}};
-	 	return(<t>{roomCheck()}{livingroomCheck()}{bathroomCheck()}</t>);
-    }
-    let houseAge = () => {
-        var constructDate = new Date(temp.constructFinishDate)
-        var now = new Date()
-        var year1 = constructDate.getFullYear()
-        var year2 = now.getFullYear()
-        if (constructDate.getMonth() <= now.getMonth()){
-            return(year2 - year1)
-        }
-        else{
-            return(year2 - year1 - 1)
-        }
-
-    }
-    var moreInfoBlock = () => {
-        let picSet = [{
-            src: `http://localhost:3002/api/getPattern/pattern/${temp.contractNum}`,
-            className: "morePictures",
-        }]
-        {
-            if (this.state.tableBack.house_pics_names !== undefined){
-                for (let i = 0; i < this.state.tableBack.house_pics_names.length; i++){
-                    picSet.push({
-                        src: `http://localhost:3002/api/getHousePic/house/${temp.contractNum}/${temp.house_pics_names[i]}`,
-                        className: "morePictures",
-                    })
-                }
-            }
-        }
-        return (<div><OverflowScrolling className='overflow-scrolling'>
-            {/* `http://localhost:3002/api/getPattern/render/${this.state.tableBack.contractNum}` */}
-            {/* <Zmage src={`http://localhost:3002/api/getPattern/pattern/${this.state.tableBack.contractNum}`} className={"moreInfoPic"} backdrop="gray" set={[
-            {
-                src: `http://localhost:3002/api/getPattern/pattern/${this.state.tableBack.contractNum}`,
-                className: "morePictures",
-            },
-            {
-                src: `http://localhost:3002/api/getHousePic/house/${this.state.tableBack.contractNum}/p05c99dh.jpg`,
-                className: "morePictures",
-            },
-            {
-                src: pic3,
-                className: "morePictures",
-            },
-            ]}/> */}
-            <Zmage src={`http://localhost:3002/api/getPattern/pattern/${temp.contractNum}`} className={"moreInfoPic"} backdrop="gray" set={picSet}/>
-            <div style={{marginLeft:"12px", marginTop:"20px", fontSize:"20px"}}>案件名稱 : {temp.innerNum + temp.caseName}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>所屬地區 : {temp.city + temp.district}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>案件地址 : {address()}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>房屋類別 : {temp.buildingType}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>房屋格局 : {patternSummary()}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>樓層 : {temp.floor1 + temp.floor2}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>售價 : {temp.contractPrice}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>每坪單價 :{temp.pricePerPing}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>座向 : {temp.facing}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>停車場 : {temp.parkingSpace}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>權狀面積 : {temp.ownershipArea}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>主建物 : {temp.mainBuilding}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>附屬建物 : {temp.subsidiaryBuilding}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>公設 : {temp.areaOfPublic} </div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>公設比 : {temp.ratioOfPublic}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>車位 : {temp.quantityOfParkingSpace}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>車位編號 : {temp.numberOfParkingSpace}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>車位價格 : {temp.priceOfParkingSpace}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>土地面積 : {temp.landArea}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>土地持份 : {temp.landHoldings}</div>
-            <div className="clear"></div>
-            {/* <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>每坪單價 :</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>自備款 :</div>
-            <div className="clear"></div> */}
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>屋齡 : {houseAge()}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>管理費 : {temp.amountOfManageFee}元 / {temp.feeFrequency}</div>
-            <div className="clear"></div>
-            <div className = "special-mention">
-                <GridType7
-                label="備註"
-                value={temp.remark}
-                width = {"90%"}     
-                />
-                
-                
-                <GridType6
-                label="特點說明"
-                value={temp.feature}
-                
-                width = {"90%"}     
-                />
-            </div>
-            <NavLink to="/item_search">
-            <img src={pic2} style={{width:"50px", marginTop:"15px", marginLeft:"15px"}} 
-            onClick={() => {this.setState({rightStatus: "searching"})}} alt=""></img>
-            </NavLink>
-            {/* button for print  */}
-            <PrintIcon style={{fontSize:50,}} onClick={this.Viewing_PDF}></PrintIcon>
-            
-
-            <div style={{marginLeft:"15px", marginTop:"12px", width:"95%", height:"5%"}}></div>
-            </OverflowScrolling></div>)
-    }
     var resultBlock = null;
     if (this.state.rightStatus === "searching"){
-        console.log("hi")
         resultBlock = listingBlock();
     }
-    else if (this.state.rightStatus === "resulting"){
-        console.log("hi2")
-        resultBlock = moreInfoBlock();
-    }
-    
     return (
     <div className="item_search-root">
         <div className="item_search-bgcolor"></div>

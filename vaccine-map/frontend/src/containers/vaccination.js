@@ -54,59 +54,54 @@ export default class Item_search extends Component {
     constructor(props) {
         super(props);
         if (props.location.aboutProps !== undefined){
-            this.state = {city:"", district:"", road:"", vaccineType:"", mrtStation:"",
-            saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
-            pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
-            houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
-            park:"", tableBack:"", rightStatus:"resulting", dataFromdb1:[], patternFromDb:[]};
+            this.state = {city:"", district:"", road:"", vaccineType:"", user_name:"", user_id:"",
+			tableBack:"", rightStatus:"resulting", dataFromdb1:[], patternFromDb:[]};
         }
         else{
-            this.state = {city:"", district:"", road:"", vaccineType:"", mrtStation:"",
-            saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
-            pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
-            houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
-            park:"", tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]};
+            this.state = {city:"", district:"", road:"", vaccineType:"", user_name:"", user_id:"",
+			tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]};
         }
     }
     clear = () => {
-        this.setState({ city:"", district:"", road:"", vaccineType:"", mrtStation:"",
-            saleStatus:"", salesperson:"", number:"", totalPrice:"", totalPrice2:"",
-            pricePerPing:"", pricePerPing2:"", ping:"", ping2:"", landHolding:"", landHolding2:"",
-            houseAge:"", houseAge2:"", floor:"", floor2:"", pattern:"", pattern2:"",
-            park:"", tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]});
+        this.setState({ city:"", district:"", road:"", vaccineType:"", user_name:"", user_id:"",
+		tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]});
     }
     
-    findObjectsForSearching = async () => {
-        let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
-        ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
-        totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
-        pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
-        landHolding2:this.state.landHolding2, houseAge:this.state.houseAge, houseAge2:this.state.houseAge2, floor:this.state.floor,
-        floor2:this.state.floor2, pattern:this.state.pattern, pattern2:this.state.pattern2,
-        park:this.state.park};
-        console.log(this.state.district);
-        await fetch("http://localhost:3002/api/findSomeObjects", {
-            method: 'POST',
-            body: JSON.stringify(objectSearched),
-            headers: {
-                'Content-Type': 'application/json'
-        }})
-        .then(res => { return res.json() })
-        .then(originData => {
-            if(originData.success) {
-                if(originData.data) {
-                    originData.data.reverse();
-                    this.setState(() => ({ dataFromdb1: originData.data }));
-                }
-                else {
-                    this.setState(() => ({ dataFromdb1: [] }));
-                }
-            }
-            else
-                alert('Fail.');
-        })
-        .catch((err) => console.error(err));
-    }
+	findObjectsForSearching = () => {
+		let test_data = [{vaccination_id:"A333", user_name:"莊育澤", vaccine_name:"A", vaccine_id:"v222"}]
+        this.setState({dataFromdb1 : test_data})
+	}
+    // findObjectsForSearching = async () => {
+    //     let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
+    //     ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
+    //     totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
+    //     pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
+    //     landHolding2:this.state.landHolding2, houseAge:this.state.houseAge, houseAge2:this.state.houseAge2, floor:this.state.floor,
+    //     floor2:this.state.floor2, pattern:this.state.pattern, pattern2:this.state.pattern2,
+    //     park:this.state.park};
+    //     console.log(this.state.district);
+    //     await fetch("http://localhost:3002/api/findSomeObjects", {
+    //         method: 'POST',
+    //         body: JSON.stringify(objectSearched),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //     }})
+    //     .then(res => { return res.json() })
+    //     .then(originData => {
+    //         if(originData.success) {
+    //             if(originData.data) {
+    //                 originData.data.reverse();
+    //                 this.setState(() => ({ dataFromdb1: originData.data }));
+    //             }
+    //             else {
+    //                 this.setState(() => ({ dataFromdb1: [] }));
+    //             }
+    //         }
+    //         else
+    //             alert('Fail.');
+    //     })
+    //     .catch((err) => console.error(err));
+    // }
     
     edit = key => e => {
         if(key === 'city')
@@ -117,62 +112,11 @@ export default class Item_search extends Component {
             this.setState({ road: e });
         else if (key === 'vaccineType')
             this.setState({ vaccineType: e });
-        else if (key === 'mrtStation')
-            this.setState({ mrtStation: e });
-        else if (key === 'saleStatus')
-            this.setState({ saleStatus: e });
-        else if (key === 'salesperson')
-            this.setState({ salesperson: e });
-        else if (key === 'number')
-            this.setState({ number: e });
-        else if (key === 'totalPrice')
-            this.setState({ totalPrice: e });
-        else if (key === 'totalPrice2')
-            this.setState({ totalPrice2: e });
-        else if (key === 'pricePerPing')
-            this.setState({ pricePerPing: e });
-        else if (key === 'pricePerPing2')
-            this.setState({ pricePerPing2: e });
-        else if (key === 'ping')
-            this.setState({ ping: e });
-        else if (key === 'ping2')
-            this.setState({ ping2: e });
-        else if (key === 'landHolding')
-            this.setState({ landHolding: e });
-        else if (key === 'landHolding2')
-            this.setState({ landHolding2: e });
-        else if (key === 'houseAge')
-            this.setState({ houseAge: e });
-        else if (key === 'houseAge2')
-            this.setState({ houseAge2: e });
-        else if (key === 'floor')
-            this.setState({ floor: e });
-        else if (key === 'floor2')
-            this.setState({ floor2: e });
-        else if (key === 'pattern')
-            this.setState({ pattern: e });
-        else if (key === 'pattern2')
-            this.setState({ pattern2: e });
-        else if (key === 'park')
-            this.setState({ park: e });
         else if (key === 'tableBack'){
             this.setState({ tableBack: e });
             this.setState({ rightStatus: "resulting"});
         }
     }
-    
-    Viewing_PDF = () =>{
-        // window.open('http://localhost:3000/PDFModel');
-        axios.post('http://localhost:3002/api/create-pdf', this.state.tableBack)
-        .then(() => axios.get('http://localhost:3002/api/fetch-pdf', { responseType:'blob'}))
-        .then((res) => {
-            const pdfBlob = new Blob([res.data], {type:'application/pdf'});
-        
-            saveAs(pdfBlob, `${this.state.tableBack.innerNum}.pdf`);
-        }) 
-    }
-
-
     
     render(){ 
         var district = [{}];
@@ -277,7 +221,7 @@ export default class Item_search extends Component {
         <div className="item_search-cl">
             <GridType1
             id="vaccine_name"
-            label="疫苗名稱"
+            label="疫苗種類"
             helperText=""
             choices={vaccine}
             value={this.state.vaccineType}
@@ -334,146 +278,11 @@ export default class Item_search extends Component {
         <CustomizedTables2 getItemInfo = {this.edit("tableBack")} dataFromdb1 = {this.state.dataFromdb1}></CustomizedTables2>
     </OverflowScrolling></div>)
     }
-    let address = () => {
-		var villageCheck = () => {if(temp.village !== ""){return (temp.village)}}
-		var neighborCheck = () => {if(temp.neighbor !== ""){return (temp.neighbor+"鄰")}}
-		var sectionCheck = () => {if(temp.section !== ""){return (temp.section+"段")}}
-		var laneCheck = () => {if(temp.lane !== ""){return (temp.lane+"巷")}}
-		var alleyCheck = () => {if(temp.alley !== ""){return (temp.alley+"弄")}}
-		var numberCheck = () => {if(temp.number1 !== ""){
-            if (temp.number2 !== ""){return(temp.number1+"號之"+temp.number2)}
-            else{return(temp.number1+"號")}
-		}}
-		var floorCheck = () => {if(temp.floor1 !== ""){
-            if (temp.floor2 !== ""){return(temp.floor1+"樓之"+temp.floor2)}
-            else{return(temp.floor1+"樓")}
-		}}
-		if (temp.city !== "" && temp.district !== "" && temp.road !== "" && temp.number1 !== ""){
-			return(<t>{temp.city}{temp.district}{villageCheck()}&nbsp;{neighborCheck()}&nbsp;
-			{temp.road}&nbsp;{sectionCheck()}{laneCheck()}{alleyCheck()}&nbsp;{numberCheck()}&nbsp;{floorCheck()}</t>)
-		}
-    }
-    let patternSummary = () => {
-		var roomCheck = () => {if (temp.room1 !== ""){
-            if (temp.room2 !== ""){return(temp.room1+"+"+temp.room2+"房")}
-            else{return(temp.room1+"房");};
-		}};
-		var livingroomCheck = () => {if (temp.livingroom !== ""){return(temp.livingroom+"廳");}};
-		var bathroomCheck = () => {if (temp.bathroom !== ""){return(temp.bathroom+"衛");}};
-	 	return(<t>{roomCheck()}{livingroomCheck()}{bathroomCheck()}</t>);
-    }
-    let houseAge = () => {
-        var constructDate = new Date(temp.constructFinishDate)
-        var now = new Date()
-        var year1 = constructDate.getFullYear()
-        var year2 = now.getFullYear()
-        if (constructDate.getMonth() <= now.getMonth()){
-            return(year2 - year1)
-        }
-        else{
-            return(year2 - year1 - 1)
-        }
-
-    }
-    var moreInfoBlock = () => {
-        let picSet = [{
-            src: `http://localhost:3002/api/getPattern/pattern/${temp.contractNum}`,
-            className: "morePictures",
-        }]
-        {
-            if (this.state.tableBack.house_pics_names !== undefined){
-                for (let i = 0; i < this.state.tableBack.house_pics_names.length; i++){
-                    picSet.push({
-                        src: `http://localhost:3002/api/getHousePic/house/${temp.contractNum}/${temp.house_pics_names[i]}`,
-                        className: "morePictures",
-                    })
-                }
-            }
-        }
-        return (<div><OverflowScrolling className='overflow-scrolling'>
-            {/* `http://localhost:3002/api/getPattern/render/${this.state.tableBack.contractNum}` */}
-            {/* <Zmage src={`http://localhost:3002/api/getPattern/pattern/${this.state.tableBack.contractNum}`} className={"moreInfoPic"} backdrop="gray" set={[
-            {
-                src: `http://localhost:3002/api/getPattern/pattern/${this.state.tableBack.contractNum}`,
-                className: "morePictures",
-            },
-            {
-                src: `http://localhost:3002/api/getHousePic/house/${this.state.tableBack.contractNum}/p05c99dh.jpg`,
-                className: "morePictures",
-            },
-            {
-                src: pic3,
-                className: "morePictures",
-            },
-            ]}/> */}
-            <Zmage src={`http://localhost:3002/api/getPattern/pattern/${temp.contractNum}`} className={"moreInfoPic"} backdrop="gray" set={picSet}/>
-            <div style={{marginLeft:"12px", marginTop:"20px", fontSize:"20px"}}>案件名稱 : {temp.innerNum + temp.caseName}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>所屬地區 : {temp.city + temp.district}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>案件地址 : {address()}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>房屋類別 : {temp.buildingType}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>房屋格局 : {patternSummary()}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>樓層 : {temp.floor1 + temp.floor2}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>售價 : {temp.contractPrice}</div>
-            <div style={{marginLeft:"12px", marginTop:"12px", fontSize:"20px"}}>每坪單價 :{temp.pricePerPing}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>座向 : {temp.facing}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>停車場 : {temp.parkingSpace}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>權狀面積 : {temp.ownershipArea}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>主建物 : {temp.mainBuilding}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>附屬建物 : {temp.subsidiaryBuilding}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>公設 : {temp.areaOfPublic} </div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>公設比 : {temp.ratioOfPublic}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>車位 : {temp.quantityOfParkingSpace}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>車位編號 : {temp.numberOfParkingSpace}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>車位價格 : {temp.priceOfParkingSpace}</div>
-            <div className="clear"></div>
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>土地面積 : {temp.landArea}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>土地持份 : {temp.landHoldings}</div>
-            <div className="clear"></div>
-            {/* <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>每坪單價 :</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>自備款 :</div>
-            <div className="clear"></div> */}
-            <div style={{float: "left", marginLeft:"15px", marginTop:"12px", fontSize:"20px"}}>屋齡 : {houseAge()}</div>
-            <div style={{marginLeft:"369px", marginTop:"12px", fontSize:"20px"}}>管理費 : {temp.amountOfManageFee}元 / {temp.feeFrequency}</div>
-            <div className="clear"></div>
-            <div className = "special-mention">
-                <GridType7
-                label="備註"
-                value={temp.remark}
-                width = {"90%"}     
-                />
-                
-                
-                <GridType6
-                label="特點說明"
-                value={temp.feature}
-                
-                width = {"90%"}     
-                />
-            </div>
-            <NavLink to="/item_search">
-            <img src={pic2} style={{width:"50px", marginTop:"15px", marginLeft:"15px"}} 
-            onClick={() => {this.setState({rightStatus: "searching"})}} alt=""></img>
-            </NavLink>
-            {/* button for print  */}
-            <PrintIcon style={{fontSize:50,}} onClick={this.Viewing_PDF}></PrintIcon>
-            
-
-            <div style={{marginLeft:"15px", marginTop:"12px", width:"95%", height:"5%"}}></div>
-            </OverflowScrolling></div>)
-    }
+    
     var resultBlock = null;
     if (this.state.rightStatus === "searching"){
         console.log("hi")
         resultBlock = listingBlock();
-    }
-    else if (this.state.rightStatus === "resulting"){
-        console.log("hi2")
-        resultBlock = moreInfoBlock();
     }
     
     return (

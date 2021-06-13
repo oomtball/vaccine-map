@@ -62,15 +62,11 @@ export default function CustomizedTables(props) {
         </TableHead>
         <TableBody>
           {props.dataFromdb1.map(row => (
-            <StyledTableRow key={row.caseName}>
-              <NavLink to={"/item_search/"+row.contractNum}>
-                <StyledTableCell component="th" scope="row" onClick={() => handleChange(row)}>
-                  {row.innerNum + row.caseName}
-                </StyledTableCell>
-              </NavLink>
-              <StyledTableCell align="left">{row.contractNum}</StyledTableCell>
-              <StyledTableCell align="left">{row.district + row.road}</StyledTableCell>
-              <StyledTableCell align="left">{row.contractPrice}</StyledTableCell>
+            <StyledTableRow key={row.city}>
+              <StyledTableCell align="left">{row.city}</StyledTableCell>
+              <StyledTableCell align="left">{row.district}</StyledTableCell>
+              <StyledTableCell align="left">{row.vaccineType}</StyledTableCell>
+              <StyledTableCell align="left">{row.num}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
