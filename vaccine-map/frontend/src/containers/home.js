@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import "../styles/home.css"
-import HomeCasePresent from "./home_casePresent";
-
-
 export default class Home extends Component {
     constructor(props) {
         super(props);
