@@ -9,5 +9,7 @@ EXPOSE 3002
 
 CMD ["npm", "start"]
 
+ENV GOOGLE_APPLICATION_CREDENTIALS=/home/node/app/service-account.json
+
 COPY . .
 RUN rm Dockerfile

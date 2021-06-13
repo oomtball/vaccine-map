@@ -15,6 +15,35 @@ const User = require("./user")
 const File = require("./file")
 const Objects = require("./objects")
 
+const {Bigtable} = require('@google-cloud/bigtable');
+const bigtable = new Bigtable();
+const tableID = "test-table";
+async function quickstart() {
+  // Connect to an existing instance:my-bigtable-instance
+  const instance = bigtable.instance("app-database");
+
+  // Connect to an existing table:my-table
+  const table = instance.table(tableID);
+  const [tableExists] = await table.exists();
+  if(!tableExists){
+    console.log(`Creating table ${tableID}`);
+    // This is the main structure of the table
+    const options = {
+      families: [
+        {
+          name: "test-family",
+          rule: {
+            versions: 1
+          }
+        }
+      ]
+    };
+    await table.create(options);
+  }
+  console.log(`Table ${tableID} is ready.`);
+}
+quickstart();
+
 const API_PORT = 3002;
 const app = express();
 app.use(cors());
