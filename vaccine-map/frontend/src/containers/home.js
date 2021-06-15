@@ -23,7 +23,7 @@ export default class Home extends Component {
         return (
            <div className = "home-root">     
                 <div className="home-bgcolor"></div>
-                
+                abc
                 <div className = "home-bgcolor2"></div>
                 <div className = "home-clear"></div>
             </div>
