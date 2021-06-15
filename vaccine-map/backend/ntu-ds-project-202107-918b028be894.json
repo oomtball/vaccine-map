@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ntu-ds-project-202107",
+  "private_key_id": "918b028be894a45204071f1ca46fe6a4f3736d25",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC3B2J5TY+Bo8iV\nBrlcroapASz1L1qzOdl8I/Q7y/x9DzxXGC5TBm9cfbXMWFJ9kTUxUqAIHtt3QHD0\n4h5aQqxu4Xx2lPxO13gJFfuvHga+DWT4uNjbQ+HdnokoXqUHOr4xK5phg4Eu/VG3\n0VDuwNELd5PXFk9c3DDB6vrRMiUKfTE6+QMAmH9pggIvxofJ0bgtXEjPsUXPMT+O\n+OkYz4xCKE5QJCOeYRUafQ9XGdRmJRW/O/2KVXXdJYbKFTgP+QQa1TjNHA7iPdJ3\nIYmmOTI6kRzTwHUEMNNNfWZj4NAth3j4OZNKjByCPHvayezC129/6ts49WwbEJSM\nfPUJ5d0LAgMBAAECggEAU4TNpT/Ev+oOgh5+4DGNpjowmzOAJm+78/9uGAlFzoVw\nyedxYBZ8I48DsdsNzVnBFaA4AWyfRgQEZ2J1akeparF/O5dRqOJ+1lqPLkI73ma7\nUBn9btTDkP8iZGcH1Ew0dLiKanv5K4mRzBj6XvBik+J9dnUqQtwBbcO9r088AtQE\noQUvLxgHSPBbWKdQPZw6rJBj/88z55hg6yOW2Wq4KC8z7Q34ZP7nPwFOcgO+Dtdt\ne7giSWbYwt8f2+Eh+V2RM0sxuWSjnBfjRSbriOAKD/orN8v0Faln9GK92XDPzYCg\nWr2Gmt/WEreeCdYbcNhz9hqrFpOF82CXsBEoM7yoVQKBgQD/uWdScrIrNisTcCok\nXJjm5tvYULCtgfuUuyi5h8SXcPVnOie8YdTdPJpaHnIRyxFQijbnoTZIBGHqth5z\nBpsRFG8iJyJEYvfdJcNpT5fNPhokAsRCyv7SQSzNWbq9sH7IuqA1IKGTbsTZLJGm\n4Leb7iwIDZT+Vep8WA5awbn9zwKBgQC3OemVxnopefPHz9cAbFT5YdWNzyNIoNvD\nPKfJG7pELR7agAKqYj+/PF150Hqp9b9+5m5Y5Qh5zOaHiZqaKY/Z2+F0foBIJcM1\nnkEw39arhvW2y5uZOE4deFb/uAdFKr6Q6CNs5IBOj8lyxfKdjutMPkxrS/OyFh/k\nXdbroZ+YBQKBgHD/XQ+KjP4ZJnmlY4nDvPCy7Ewug5N3z1JOTVWGD7GXgWjGws40\nMJo98DqIH4GLSLBdEpvRmanC/f130gaj0Zt/ewgNYM/1J296A1oiiIJxwZ1N96lI\nB8eicwiecKznM27BQI+ZRqxeEu+gCRBDVf66BIzea4rjLgUZ5+XkmqnzAoGARWby\nS4E6lKtU48KeNdLS/QNJ2MU1IDWOCI3ZIBwYmepdXXZPjCpa6xz6a0HEtMwZFQBD\nm/hlFX2/dGdy4CIOEv9ujqm7/ZgQMScYmmKu9ZnRSMQm1Aq3zAHhMkuKtXBTbp//\niyeiUh+0tny0QWn5Ro/yclH6pOIsglvpJKe7w+ECgYEA/pD7vZC7KqTrxvxFAItu\nkrT7SaJNsoI+MGM9vyhC+57FtDGtcfVSK2W5TQSQL+kc90E7BRUHIDrkmJz6T452\n8ierZFBYw4v2Hx3kH2hniK9THEQl92qaXlJ/WhWNJ5EJOBlD2zzL2nGWHsXvBw8K\nTVim0d4yE/8Ne+nyRseNd10=\n-----END PRIVATE KEY-----\n",
+  "client_email": "node-js-backend@ntu-ds-project-202107.iam.gserviceaccount.com",
+  "client_id": "116979607390711261922",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/node-js-backend%40ntu-ds-project-202107.iam.gserviceaccount.com"
+}
