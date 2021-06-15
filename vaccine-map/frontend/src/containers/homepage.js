@@ -197,7 +197,7 @@ export default class Homepage extends Component {
                         </Switch>
                     </section>
                     <footer className="homepage-footer">
-                        台灣疫苗地圖
+                        台灣疫苗地圖test
                     </footer>
                 </div>
             </div>
