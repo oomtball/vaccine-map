@@ -17,18 +17,17 @@ const Objects = require("./objects")
 
 const {Bigtable} = require('@google-cloud/bigtable');
 const bigtable = new Bigtable();
+// Connect to an existing instance:my-bigtable-instance
+const instance = bigtable.instance("app-database");
+// Connect to an existing table:my-table
+const tableID = "test-table";
+const table = instance.table(tableID);
 const COLUMN_FAMILY_ID = "test-family";
 const COLUMN_QUALIFIER = "greeting";
-const tableID = "test-table";
 const getRowGreeting = row => {
   return row.data[COLUMN_FAMILY_ID][COLUMN_QUALIFIER][0].value;
 };
-async function quickstart() {
-  // Connect to an existing instance:my-bigtable-instance
-  const instance = bigtable.instance("app-database");
-
-  // Connect to an existing table:my-table
-  const table = instance.table(tableID);
+async function initializeTable(){
   const [tableExists] = await table.exists();
   if(!tableExists){
     console.log(`Creating table ${tableID}`);
@@ -46,6 +45,11 @@ async function quickstart() {
     await table.create(options);
   }
   console.log(`Table ${tableID} is ready.`);
+}
+initializeTable();
+
+async function quickstart() {
+  
   console.log('Write some greetings to the table');
     const greetings = ['Hello World!', 'Hello Bigtable!', 'Hello Node!'];
     const rowsToInsert = greetings.map((greeting, index) => ({
@@ -85,6 +89,39 @@ async function quickstart() {
     console.log(`\tRead: ${getRowGreeting(singleRow)}`);
 }
 quickstart();
+
+async function getAllData(){
+  const filter = [
+    {
+      column: {
+        cellLimit: 1, // Only retrieve the most recent version of the cell.
+      },
+    },
+  ];
+  // get single row by key
+  // let row = table.row(key);
+
+  // get all rows
+  // you can restrict what rows you want by prefix of the row key, etc.
+  table.createReadStream({filter: filter/*, prefix: 'watame'*/})
+    .on('data', row => {
+      // Do something about the row object
+      console.log(`The id (key) of the row: ${row.id}`);
+      console.log('The data of the row object:');
+      console.log(row.data);
+      // retrieve all column families
+      for(let cf in row.data){
+        console.log(`\tcolumnfamily ${cf}`);
+        // retrieve all columns
+        for(let c in row.data[cf]){
+          // retrieve the real data in the most recent cell
+          console.log(`\t\tcolumn ${cf}:${c}, content: ${row.data[cf][c][0].value}`);
+          // equivalent to getRowGreeting(row)
+        }
+      }
+    });
+}
+getAllData();
 
 // const API_PORT = 3002;
 // const app = express();
