@@ -40,8 +40,8 @@ router.post('/addOneCase', (req, res) => {
     const vacs = [temp.user_name, temp.user_id, temp.gender, temp.birthday, temp.city, temp.district, temp.village, temp.neighbor,
     temp.road, temp.section, temp.lane, temp.alley, temp.number1, temp.number2, temp.floor1, temp.floor2, temp.vaccine_name,
     temp.vaccine_id, temp.vaccine_info, temp.vaccination_date];
-    const rowsToInsert = vacs.map((vac, index) => ({
-      key: `vac${index}`,
+    const rowsToInsert = {
+      key: temp.user_id + "-" + temp.vaccine_id,
       data: {
         "profile": {
           "user_name": {timestamp: new Date(), value: temp.user_name},
@@ -68,17 +68,54 @@ router.post('/addOneCase', (req, res) => {
           "vaccination_date": {timestamp: new Date(), value: temp.vaccination_date},
         },
       },
-    }));
+    };
     table.insert(rowsToInsert);
     res.json({ success: true })
     // .catch((err) => {
     //   console.error(err);
     // })
 })
+const getRows = row => {
+	return row.data["profile"]["city"][0].value;
+};
+async function getRowData() {
+	const filter = [
+		{
+		  column: {
+			cellLimit: 1, // Only retrieve the most recent version of the cell.
+		  },
+		},
+	  ];
+	  
+	// console.log('Reading a single row by row key');
+	// const [singleRow] = await table.row('vac0').get({filter}); // change the number behind greeting will get the different words!
+	// console.log(`\tRead: ${getRows(singleRow)}`);
+
+	let return_data = {};
+	table.createReadStream({filter: filter/*, prefix: 'watame'*/})
+    .on('data', row => {
+      // Do something about the row object
+    //   console.log(`The id (key) of the row: ${row.id}`);
+    //   console.log('The data of the row object:');
+    //   console.log(row.data);
+      // retrieve all column families
+      for(let cf in row.data){
+        console.log(`\tcolumnfamily ${cf}`);
+        // retrieve all columns
+        for(let c in row.data[cf]){
+          // retrieve the real data in the most recent cell
+          console.log(`\t\tcolumn ${cf}:${c}, content: ${row.data[cf][c][0].value}`);
+          // equivalent to getRowGreeting(row)
+        }
+      }
+    });
+};
 router.post('/searchCase1', (req, res) => {
   console.log(req.body);
+  getRowData();
   return res.json({ success: true });
 })
+
 router.post('/searchCase2', (req, res) => {
   console.log(req.body);
   return res.json({ success: true });
@@ -111,50 +148,46 @@ async function initializeTable(){
 }
 initializeTable();
 
-
-const getRowGreeting = row => {
-  return row.data[COLUMN_FAMILY_ID][COLUMN_QUALIFIER][0].value;
-};
-async function quickstart() {
+// async function quickstart() {
   
-  console.log('Write some greetings to the table');
-    const greetings = ['Hello World!', 'Hello Bigtable!', 'Hello Node!'];
-    const rowsToInsert = greetings.map((greeting, index) => ({
-      // Note: This example uses sequential numeric IDs for simplicity, but this
-      // pattern can result in poor performance in a production application.
-      // Rows are stored in sorted order by key, so sequential keys can result
-      // in poor distribution of operations across nodes.
-      //
-      // For more information about how to design an effective schema for Cloud
-      // Bigtable, see the documentation:
-      // https://cloud.google.com/bigtable/docs/schema-design
-      key: `greeting${index}`,
-      data: {
-        [COLUMN_FAMILY_ID]: {
-          [COLUMN_QUALIFIER]: {
-            // Setting the timestamp allows the client to perform retries. If
-            // server-side time is used, retries may cause multiple cells to
-            // be generated.
-            timestamp: new Date(),
-            value: greeting,
-          },
-        },
-      },
-    }));
-    await table.insert(rowsToInsert);
+//   console.log('Write some greetings to the table');
+//     const greetings = ['Hello World!', 'Hello Bigtable!', 'Hello Node!'];
+//     const rowsToInsert = greetings.map((greeting, index) => ({
+//       // Note: This example uses sequential numeric IDs for simplicity, but this
+//       // pattern can result in poor performance in a production application.
+//       // Rows are stored in sorted order by key, so sequential keys can result
+//       // in poor distribution of operations across nodes.
+//       //
+//       // For more information about how to design an effective schema for Cloud
+//       // Bigtable, see the documentation:
+//       // https://cloud.google.com/bigtable/docs/schema-design
+//       key: `greeting${index}`,
+//       data: {
+//         [COLUMN_FAMILY_ID]: {
+//           [COLUMN_QUALIFIER]: {
+//             // Setting the timestamp allows the client to perform retries. If
+//             // server-side time is used, retries may cause multiple cells to
+//             // be generated.
+//             timestamp: new Date(),
+//             value: greeting,
+//           },
+//         },
+//       },
+//     }));
+//     await table.insert(rowsToInsert);
 
-    const filter = [
-      {
-        column: {
-          cellLimit: 1, // Only retrieve the most recent version of the cell.
-        },
-      },
-    ];
+//     const filter = [
+//       {
+//         column: {
+//           cellLimit: 1, // Only retrieve the most recent version of the cell.
+//         },
+//       },
+//     ];
 
-    console.log('Reading a single row by row key');
-    const [singleRow] = await table.row('greeting1').get({filter}); // change the number behind greeting will get the different words!
-    console.log(`\tRead: ${getRowGreeting(singleRow)}`);
-}
+//     console.log('Reading a single row by row key');
+//     const [singleRow] = await table.row('greeting1').get({filter}); // change the number behind greeting will get the different words!
+//     console.log(`\tRead: ${getRowGreeting(singleRow)}`);
+// }
 // quickstart();
 
 async function getAllData(){
