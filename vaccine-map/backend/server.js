@@ -110,7 +110,13 @@ async function getRowData() {
       }
     });
 };
+
 router.post('/searchCase1', (req, res) => {
+  console.log(req.body);
+  return res.json({ success: true });
+})
+
+router.post('/searchCase2', (req, res) => {
   console.log(req.body);
   const searchFactor = req.body;
   const filter = [
@@ -120,7 +126,7 @@ router.post('/searchCase1', (req, res) => {
       },
     },
     {
-      row: new RegExp('\\d+-' + searchFactor.vaccine_id),
+      row: new RegExp('\\w+-' + searchFactor.user_name),
     }
   ];
   // Get rows that matches the vaccine ID in row key
@@ -136,11 +142,6 @@ router.post('/searchCase1', (req, res) => {
       row.data['profile']['road'][0].value == searchFactor.road;
   });
   return res.json({ success: true, data: result_rows });
-})
-
-router.post('/searchCase2', (req, res) => {
-  console.log(req.body);
-  return res.json({ success: true });
 })
 
 async function initializeTable(){
