@@ -112,8 +112,30 @@ async function getRowData() {
 };
 router.post('/searchCase1', (req, res) => {
   console.log(req.body);
-  getRowData();
-  return res.json({ success: true });
+  const searchFactor = req.body;
+  const filter = [
+    {
+      column: {
+        cellLimit: 1, // Only retrieve the most recent version of the cell.
+      },
+    },
+    {
+      row: new RegExp('\\d+-' + searchFactor.vaccine_id),
+    }
+  ];
+  // Get rows that matches the vaccine ID in row key
+  // It is better to put all the factors on the key,
+  // so that the whole search can be down in one line.
+  const base_rows = table.getRows({filter: filter});
+  // Filter the rows matching the constraints
+  // using the built-in filter in javascript.
+  const result_rows = base_rows.filter(row => {
+    return
+      row.data['profile']['city'][0].value == searchFactor.city &&
+      row.data['profile']['district'][0].value == searchFactor.district &&
+      row.data['profile']['road'][0].value == searchFactor.road;
+  });
+  return res.json({ success: true, data: result_rows });
 })
 
 router.post('/searchCase2', (req, res) => {
