@@ -37,7 +37,9 @@ app.set('view engine', 'ejs')
 
 router.post('/addOneCase', (req, res) => {
     temp = req.body;
-    const vacs = [temp];
+    const vacs = [temp.user_name, temp.user_id, temp.gender, temp.birthday, temp.city, temp.district, temp.village, temp.neighbor,
+    temp.road, temp.section, temp.lane, temp.alley, temp.number1, temp.number2, temp.floor1, temp.floor2, temp.vaccine_name,
+    temp.vaccine_id, temp.vaccine_info, temp.vaccination_date];
     const rowsToInsert = vacs.map((vac, index) => ({
       key: `vac${index}`,
       data: {
