@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const express = require("express");
 var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
@@ -20,13 +19,54 @@ const bigtable = new Bigtable();
 // Connect to an existing instance:my-bigtable-instance
 const instance = bigtable.instance("app-database");
 // Connect to an existing table:my-table
-const tableID = "test-table";
+const tableID = "vaccination-record";
 const table = instance.table(tableID);
-const COLUMN_FAMILY_ID = "test-family";
-const COLUMN_QUALIFIER = "greeting";
-const getRowGreeting = row => {
-  return row.data[COLUMN_FAMILY_ID][COLUMN_QUALIFIER][0].value;
-};
+const COLUMN_FAMILY_ID = "vaccination-family";
+const COLUMN_QUALIFIER = "vacs";
+
+const express = require('express')
+const app = express()
+app.use(cors());
+const router = express.Router();
+const API_PORT = 3002
+router.use(bodyParser.urlencoded({ extended: false }));
+router.use(bodyParser.json());
+router.use(methodOverride('_method'))
+router.use(logger("dev"));
+app.set('view engine', 'ejs')
+
+router.post('/addOneCase', (req, res) => {
+    temp = req.body;
+    const vacs = [temp];
+    const rowsToInsert = vacs.map((vac, index) => ({
+      key: `vac${index}`,
+      data: {
+        [COLUMN_FAMILY_ID]: {
+          [COLUMN_QUALIFIER]: {
+            // Setting the timestamp allows the client to perform retries. If
+            // server-side time is used, retries may cause multiple cells to
+            // be generated.
+            timestamp: new Date(),
+            value: vac,
+          },
+        },
+      },
+    }));
+    table.insert(rowsToInsert);
+    res.json({ success: true })
+    // .catch((err) => {
+    //   console.error(err);
+    // })
+})
+router.post('/searchCase1', (req, res) => {
+  console.log(req.body);
+  return res.json({ success: true });
+})
+router.post('/searchCase2', (req, res) => {
+  console.log(req.body);
+  return res.json({ success: true });
+})
+
 async function initializeTable(){
   const [tableExists] = await table.exists();
   if(!tableExists){
@@ -48,6 +88,10 @@ async function initializeTable(){
 }
 initializeTable();
 
+
+const getRowGreeting = row => {
+  return row.data[COLUMN_FAMILY_ID][COLUMN_QUALIFIER][0].value;
+};
 async function quickstart() {
   
   console.log('Write some greetings to the table');
@@ -88,7 +132,7 @@ async function quickstart() {
     const [singleRow] = await table.row('greeting1').get({filter}); // change the number behind greeting will get the different words!
     console.log(`\tRead: ${getRowGreeting(singleRow)}`);
 }
-quickstart();
+// quickstart();
 
 async function getAllData(){
   const filter = [
@@ -115,13 +159,15 @@ async function getAllData(){
         // retrieve all columns
         for(let c in row.data[cf]){
           // retrieve the real data in the most recent cell
-          console.log(`\t\tcolumn ${cf}:${c}, content: ${row.data[cf][c][0].value}`);
+          console.log(`\t\tcolumn ${cf}:${c}, content: ${row.data.user_name}`);
           // equivalent to getRowGreeting(row)
         }
       }
     });
 }
 getAllData();
+app.use("/api", router);
+app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 
 // const API_PORT = 3002;
 // const app = express();

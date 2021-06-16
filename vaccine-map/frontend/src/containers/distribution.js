@@ -55,41 +55,36 @@ export default class Item_search extends Component {
         tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]});
     }
 
-    findObjectForSearching = () => {
-        let test_data = [{city:"test_city", district:"test_district", road:"test_road", vaccineType:"A", num:"100"}]
-        this.setState({dataFromdb1 : test_data})
-    }
-    // findObjectsForSearching = async () => {
-    //     let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
-    //     ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
-    //     totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
-    //     pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
-    //     landHolding2:this.state.landHolding2, houseAge:this.state.houseAge, houseAge2:this.state.houseAge2, floor:this.state.floor,
-    //     floor2:this.state.floor2, pattern:this.state.pattern, pattern2:this.state.pattern2,
-    //     park:this.state.park};
-    //     console.log(this.state.district);
-    //     await fetch("http://localhost:3002/api/findSomeObjects", {
-    //         method: 'POST',
-    //         body: JSON.stringify(objectSearched),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //     }})
-    //     .then(res => { return res.json() })
-    //     .then(originData => {
-    //         if(originData.success) {
-    //             if(originData.data) {
-    //                 originData.data.reverse();
-    //                 this.setState(() => ({ dataFromdb1: originData.data }));
-    //             }
-    //             else {
-    //                 this.setState(() => ({ dataFromdb1: [] }));
-    //             }
-    //         }
-    //         else
-    //             alert('Fail.');
-    //     })
-    //     .catch((err) => console.error(err));
+    // findObjectForSearching = () => {
+    //     let test_data = [{city:"test_city", district:"test_district", road:"test_road", vaccineType:"A", num:"100"}]
+    //     this.setState({dataFromdb1 : test_data})
     // }
+    findObjectsForSearching = async () => {
+        let caseSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType};
+        console.log(caseSearched);
+        await fetch("http://localhost:3002/api/searchCase1", {
+            method: 'POST',
+            body: JSON.stringify(caseSearched),
+            headers: {
+                'Content-Type': 'application/json'
+        }})
+        .then(res => { return res.json() })
+        .then(originData => {
+            if(originData.success) {
+                if(originData.data) {
+                    console.log(originData.data)
+                    // originData.data.reverse();
+                    this.setState(() => ({ dataFromdb1: originData.data }));
+                }
+                else {
+                    this.setState(() => ({ dataFromdb1: [] }));
+                }
+            }
+            else
+                alert('Fail.');
+        })
+        .catch((err) => console.error(err));
+    }
     edit = key => e => {
         if(key === 'city')
             this.setState({ city: e, district: ""});
@@ -227,7 +222,7 @@ export default class Item_search extends Component {
                     size="large"
                     style={{marginLeft:'30%',}}
                     >
-                        <BootstrapButton onClick={this.findObjectForSearching}>搜尋</BootstrapButton>
+                        <BootstrapButton onClick={this.findObjectsForSearching}>搜尋</BootstrapButton>
                         <BootstrapButton onClick={this.clear}>重置</BootstrapButton>
                     </ButtonGroup>
                 </Grid>

@@ -71,37 +71,32 @@ export default class Item_search extends Component {
 		let test_data = [{vaccination_id:"A333", user_name:"莊育澤", vaccine_name:"A", vaccine_id:"v222"}]
         this.setState({dataFromdb1 : test_data})
 	}
-    // findObjectsForSearching = async () => {
-    //     let objectSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType
-    //     ,mrtStation:this.state.mrtStation, saleStatus:this.state.saleStatus, salesperson:this.state.salesperson, number:this.state.number,
-    //     totalPrice:this.state.totalPrice, totalPrice2:this.state.totalPrice2, pricePerPing:this.state.pricePerPing,
-    //     pricePerPing2:this.state.pricePerPing2, ping:this.state.ping, ping2:this.state.ping2, landHolding:this.state.landHolding,
-    //     landHolding2:this.state.landHolding2, houseAge:this.state.houseAge, houseAge2:this.state.houseAge2, floor:this.state.floor,
-    //     floor2:this.state.floor2, pattern:this.state.pattern, pattern2:this.state.pattern2,
-    //     park:this.state.park};
-    //     console.log(this.state.district);
-    //     await fetch("http://localhost:3002/api/findSomeObjects", {
-    //         method: 'POST',
-    //         body: JSON.stringify(objectSearched),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //     }})
-    //     .then(res => { return res.json() })
-    //     .then(originData => {
-    //         if(originData.success) {
-    //             if(originData.data) {
-    //                 originData.data.reverse();
-    //                 this.setState(() => ({ dataFromdb1: originData.data }));
-    //             }
-    //             else {
-    //                 this.setState(() => ({ dataFromdb1: [] }));
-    //             }
-    //         }
-    //         else
-    //             alert('Fail.');
-    //     })
-    //     .catch((err) => console.error(err));
-    // }
+    findObjectsForSearching = async () => {
+        let caseSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType,
+        user_name:this.state.user_name, user_id:this.state.user_id};
+        await fetch("http://localhost:3002/api/searchCase2", {
+            method: 'POST',
+            body: JSON.stringify(caseSearched),
+            headers: {
+                'Content-Type': 'application/json'
+        }})
+        .then(res => { return res.json() })
+        .then(originData => {
+            if(originData.success) {
+                if(originData.data) {
+                    console.log(originData.data)
+                    // originData.data.reverse();
+                    this.setState(() => ({ dataFromdb1: originData.data }));
+                }
+                else {
+                    this.setState(() => ({ dataFromdb1: [] }));
+                }
+            }
+            else
+                alert('Fail.');
+        })
+        .catch((err) => console.error(err));
+    }
     
     edit = key => e => {
         if(key === 'city')
@@ -112,6 +107,10 @@ export default class Item_search extends Component {
             this.setState({ road: e });
         else if (key === 'vaccineType')
             this.setState({ vaccineType: e });
+        else if (key === 'user_name')
+            this.setState({ user_name: e });
+        else if (key === 'user_id')
+            this.setState({ user_id: e });   
         else if (key === 'tableBack'){
             this.setState({ tableBack: e });
             this.setState({ rightStatus: "resulting"});
@@ -230,24 +229,20 @@ export default class Item_search extends Component {
             />
         </div>
 		<div className="item_search-cl">
-            <GridType1
-            id="name"
+            <GridType2
+            id="user_name"
             label="姓名"
-            helperText=""
-            choices={city2}
-            value={this.state.city}
-            changeFunc={this.edit("city")}
-            width = {100}
-            />
-            <GridType1
-            id="ID"
+            value={this.state.user_name}
+            changeFunc={this.edit("user_name")}
+            width= {150}
+            />    
+            <GridType2
+            id="user_id"
             label="身分證"
-            helperText=""
-            choices={district}
-            value={this.state.district}
-            changeFunc={this.edit("district")}
-            width = {100}
-            />          
+            value={this.state.user_id}
+            changeFunc={this.edit("user_id")}
+            width= {200}
+            />                 
         </div> 
         <div>
             <Grid item className="item_search-buttongroup">
@@ -281,7 +276,6 @@ export default class Item_search extends Component {
     
     var resultBlock = null;
     if (this.state.rightStatus === "searching"){
-        console.log("hi")
         resultBlock = listingBlock();
     }
     
