@@ -55,7 +55,7 @@ export default class Homepage extends Component {
             <NavLink to="/home" className="drawer_link">
               <ListItem button>
                     <ListItemIcon style={{ color: '#fcd29f' }}><HomeIcon /></ListItemIcon>
-                    <ListItemText primary="首頁"/>
+                    <ListItemText primary="疫苗地圖"/>
               </ListItem>
             </NavLink>
             <NavLink to="/distribution" className="drawer_link">
@@ -70,12 +70,12 @@ export default class Homepage extends Component {
                 <ListItemText primary="地區人口疫苗接種現況"/>
               </ListItem>
             </NavLink>
-            <NavLink to="/map_page" className="drawer_link">
+            {/* <NavLink to="/map_page" className="drawer_link">
               <ListItem button>
                 <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
                 <ListItemText primary="彙整疫苗地圖"/>
               </ListItem>
-            </NavLink>
+            </NavLink> */}
           </List>
           <Divider />
           <List style={{ backgroundColor: 'rgba(35, 150, 127, 0.4)' }}>
@@ -85,12 +85,12 @@ export default class Homepage extends Component {
                 <ListItemText primary="新增接種資訊"/>
               </ListItem>
             </NavLink>
-            <NavLink to="/modify_case" className="drawer_link">
+            {/* <NavLink to="/modify_case" className="drawer_link">
               <ListItem button>
                 <ListItemIcon style={{ color: '#fcd29f' }}><DataIcon /></ListItemIcon>
                 <ListItemText primary="修改地區資料"/>
               </ListItem>
-            </NavLink>
+            </NavLink> */}
           </List>
         </div>
     )
