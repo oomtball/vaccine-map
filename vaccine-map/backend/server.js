@@ -43,14 +43,29 @@ router.post('/addOneCase', (req, res) => {
     const rowsToInsert = vacs.map((vac, index) => ({
       key: `vac${index}`,
       data: {
-        [COLUMN_FAMILY_ID]: {
-          [COLUMN_QUALIFIER]: {
-            // Setting the timestamp allows the client to perform retries. If
-            // server-side time is used, retries may cause multiple cells to
-            // be generated.
-            timestamp: new Date(),
-            value: vac,
-          },
+        "profile": {
+          "user_name": {timestamp: new Date(), value: temp.user_name},
+          "user_id": {timestamp: new Date(), value: temp.user_id},
+          "temp_gender": {timestamp: new Date(), value: temp.gender},
+          "birthday": {timestamp: new Date(), value: temp.birthday},
+          "city": {timestamp: new Date(), value: temp.city},
+          "district": {timestamp: new Date(), value: temp.city},
+          "village": {timestamp: new Date(), value: temp.village},
+          "neighbor": {timestamp: new Date(), value: temp.neighbor},
+          "road": {timestamp: new Date(), value: temp.road},
+          "section": {timestamp: new Date(), value: temp.section},
+          "lane": {timestamp: new Date(), value: temp.lane},
+          "alley": {timestamp: new Date(), value: temp.alley},
+          "number1": {timestamp: new Date(), value: temp.number1},
+          "number2": {timestamp: new Date(), value: temp.number2},
+          "floor1": {timestamp: new Date(), value: temp.floor1},
+          "floor2": {timestamp: new Date(), value: temp.floor2},
+        },
+        "vaccination": {
+          "vaccine_name": {timestamp: new Date(), value: temp.vaccine_name},
+          "vaccine_id": {timestamp: new Date(), value: temp.vaccine_id},
+          "vaccine_info": {timestamp: new Date(), value: temp.vaccine_info},
+          "vaccination_date": {timestamp: new Date(), value: temp.vaccination_date},
         },
       },
     }));
@@ -77,7 +92,13 @@ async function initializeTable(){
     const options = {
       families: [
         {
-          name: COLUMN_FAMILY_ID,
+          name: "profile",
+          rule: {
+            versions: 1
+          }
+        },
+        {
+          name: "vaccination",
           rule: {
             versions: 1
           }
@@ -161,7 +182,7 @@ async function getAllData(){
         // retrieve all columns
         for(let c in row.data[cf]){
           // retrieve the real data in the most recent cell
-          console.log(`\t\tcolumn ${cf}:${c}, content: ${row.data.user_name}`);
+          console.log(`\t\tcolumn ${cf}:${c}, content: ${row.data[cf][c][0].value}`);
           // equivalent to getRowGreeting(row)
         }
       }
