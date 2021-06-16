@@ -56,7 +56,7 @@ export default class Home extends Component {
                     vizElement.style.height='827px';
                 } 
                 else { 
-                    izElement.style.width='100%';
+                    vizElement.style.width='100%';
                     vizElement.style.height='1527px';
                 }                     
                 var scriptElement = document.createElement('script');                    
