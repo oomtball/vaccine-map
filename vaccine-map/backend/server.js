@@ -111,6 +111,20 @@ async function getRowData() {
     });
 };
 
+function getDataFromRow(row){
+  let result = new Object();
+  for(let cf in row.data){
+    result[cf] = new Object();
+    // retrieve all columns
+    for(let c in row.data[cf]){
+      // retrieve the real data in the most recent cell
+      result[cf][c] = row.data[cf][c][0].value;
+      // equivalent to getRowGreeting(row)
+    }
+  }
+  return result;
+}
+
 // Search by city, district, road, and vaccine_name
 router.post('/searchCase1', async (req, res) => {
   console.log(req.body);
@@ -140,7 +154,9 @@ router.post('/searchCase1', async (req, res) => {
       ));
     });
   // console.log(result_rows);
-  return res.json({ success: true, data: result_rows });
+  const result = result_rows.map(getDataFromRow);
+  console.log(result);
+  return res.json({ success: true, data: result });
 })
 
 // Search by user_id and vaccine_id
@@ -169,7 +185,9 @@ router.post('/searchCase2', async (req, res) => {
       ));
     });
   // console.log(result_rows);
-  return res.json({ success: true, data: result_rows });
+  const result = result_rows.map(getDataFromRow);
+  console.log(result);
+  return res.json({ success: true, data: result });
 })
 
 async function initializeTable(){
