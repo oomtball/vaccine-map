@@ -31,23 +31,23 @@ class App extends Component {
     );
   }
   render() {
-    // return this.state.login ? (
-    //   <BrowserRouter>
-		// 		<div>
-		// 			<Homepage logout={this.logout} />
-		// 		</div>
-    //   </BrowserRouter>
-    // ) : (
-    //       <BrowserRouter>
-    //       <div className="login-screen">
-    //         <Switch>
-    //           <Route path="/login" render={this.LoginPage} />
-    //           {/* <Route path="/register" component={Register} /> */}
-    //           <Redirect from="/" to="/login" />
-    //         </Switch>
-    //       </div>
-    //       </BrowserRouter>
-    // );
+    return this.state.login ? (
+      <BrowserRouter>
+				<div>
+					<Homepage logout={this.logout} />
+				</div>
+      </BrowserRouter>
+    ) : (
+          <BrowserRouter>
+          <div className="login-screen">
+            <Switch>
+              <Route path="/login" render={this.LoginPage} />
+              {/* <Route path="/register" component={Register} /> */}
+              <Redirect from="/" to="/login" />
+            </Switch>
+          </div>
+          </BrowserRouter>
+    );
     return(
       <BrowserRouter>
       	<div>
