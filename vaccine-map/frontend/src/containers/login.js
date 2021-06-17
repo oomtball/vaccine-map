@@ -130,7 +130,7 @@ export default function Login(props) {
     return (
         <div className="login">
             <div className="login-header">
-                <header><h1 style={{ color: '#ffffff', textAlign: 'center', fontSize: '50px' }}><b>中信房屋房屋管理系統</b></h1></header>
+                <header><h1 style={{ color: '#ffffff', textAlign: 'center', fontSize: '50px' }}><b>台灣疫苗地圖</b></h1></header>
             </div>
             <div className="login-input">
                 <div className="login-subinput">
