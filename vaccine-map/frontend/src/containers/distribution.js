@@ -69,21 +69,23 @@ export default class Item_search extends Component {
                 'Content-Type': 'application/json'
         }})
         .then(res => { return res.json() })
-        .then(originData => {
-            if(originData.success) {
-                if(originData.data) {
-                    console.log(originData.data)
-                    // originData.data.reverse();
-                    this.setState(() => ({ dataFromdb1: originData.data }));
-                }
-                else {
-                    this.setState(() => ({ dataFromdb1: [] }));
-                }
-            }
-            else
-                alert('Fail.');
-        })
+        // .then(originData => {
+        //     if(originData.success) {
+        //         if(originData.data) {
+        //             console.log(originData.data)
+        //             // originData.data.reverse();
+        //             this.setState(() => ({ dataFromdb1: originData.data }));
+        //         }
+        //         else {
+        //             this.setState(() => ({ dataFromdb1: [] }));
+        //         }
+        //     }
+        //     else
+        //         alert('Fail.');
+        // })
         .catch((err) => console.error(err));
+        let test_data = [{city:"臺北市", district:"信義區", vaccineType:"A肝", num:"100"}]
+        this.setState({dataFromdb1 : test_data})
     }
     edit = key => e => {
         if(key === 'city')

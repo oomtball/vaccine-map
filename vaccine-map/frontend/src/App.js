@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import { withRouter, BrowserRouter } from "react-router-dom";
 import Homepage from './containers/homepage';
-import Login from './containers/login';
+import Login from './containers/home';
 import './styles/login.css';
 
 class App extends Component {
@@ -30,24 +30,30 @@ class App extends Component {
       <Login login={this.login}/>
     );
   }
-  
   render() {
-    return this.state.login ? (
+    // return this.state.login ? (
+    //   <BrowserRouter>
+		// 		<div>
+		// 			<Homepage logout={this.logout} />
+		// 		</div>
+    //   </BrowserRouter>
+    // ) : (
+    //       <BrowserRouter>
+    //       <div className="login-screen">
+    //         <Switch>
+    //           <Route path="/login" render={this.LoginPage} />
+    //           {/* <Route path="/register" component={Register} /> */}
+    //           <Redirect from="/" to="/login" />
+    //         </Switch>
+    //       </div>
+    //       </BrowserRouter>
+    // );
+    return(
       <BrowserRouter>
-				<div>
-					<Homepage logout={this.logout} />
-				</div>
+      	<div>
+       			<Homepage logout={this.logout} />
+       	</div>
       </BrowserRouter>
-    ) : (
-          <BrowserRouter>
-          <div className="login-screen">
-            <Switch>
-              <Route path="/login" render={this.LoginPage} />
-              {/* <Route path="/register" component={Register} /> */}
-              <Redirect from="/" to="/login" />
-            </Switch>
-          </div>
-          </BrowserRouter>
     );
   }
 }
