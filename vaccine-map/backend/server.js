@@ -246,6 +246,40 @@ async function getAllData(){
     });
 }
 //getAllData();
+
+async function computeInjected(){
+  const filter = [
+    {
+      column: {
+        cellLimit: 1, // Only retrieve the most recent version of the cell.
+      },
+    },
+  ];
+  let promise = new Promise((resolve, reject) => {
+    let mapping = new Object();
+    table.createReadStream({filter: filter})
+      .on('data', row => {
+        const city = row.data['profile']['city'][0].value;
+        const vac = row.data['vaccination']['vaccine_id'][0].value;
+        if(mapping[city] === undefined){
+          mapping[city] = new Object();
+        }
+        if(mapping[city][vac] === undefined){
+          mapping[city][vac] = 0;
+        }
+        mapping[city][vac]++;
+      })
+      .on('error', err => {
+        reject(err);
+      })
+      .on('end', () => {
+        resolve(mapping);
+      });
+  });
+  let result = await promise;
+  return result;
+}
+computeInjected();
 app.use("/api", router);
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 
