@@ -76,23 +76,23 @@ export default class Item_search extends Component {
                 'Content-Type': 'application/json'
         }})
         .then(res => { return res.json() })
-        // .then(originData => {
-        //     if(originData.success) {
-        //         if(originData.data) {
-        //             console.log(originData.data)
-        //             // originData.data.reverse();
-        //             this.setState(() => ({ dataFromdb1: originData.data }));
-        //         }
-        //         else {
-        //             this.setState(() => ({ dataFromdb1: [] }));
-        //         }
-        //     }
-        //     else
-        //         alert('Fail.');
-        // })
+        .then(originData => {
+            if(originData.success) {
+                if(originData.data) {
+                    console.log(originData.data)
+                    // originData.data.reverse();
+                    this.setState(() => ({ dataFromdb1: originData.data }));
+                }
+                else {
+                    this.setState(() => ({ dataFromdb1: [] }));
+                }
+            }
+            else
+                alert('Fail.');
+        })
         .catch((err) => console.error(err));
-        let test_data = [{vaccination_id:"接種編號-01", user_name:"劉先生", vaccine_name:"A肝", vaccine_id:"A肝-01"}]
-        this.setState({dataFromdb1 : test_data})
+        // let test_data = [{vaccination_id:"接種編號-01", user_name:"劉先生", vaccine_name:"A肝", vaccine_id:"A肝-01"}]
+        // this.setState({dataFromdb1 : test_data})
     }
     
     edit = key => e => {

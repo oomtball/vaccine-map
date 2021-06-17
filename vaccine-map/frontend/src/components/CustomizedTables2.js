@@ -54,7 +54,7 @@ export default function CustomizedTables(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <StyledTableCell>接種編號</StyledTableCell>
+            <StyledTableCell>疫苗出產</StyledTableCell>
             <StyledTableCell align="left">接種人姓名</StyledTableCell>
             <StyledTableCell align="left">疫苗名稱</StyledTableCell>
             <StyledTableCell align="left">疫苗編號</StyledTableCell>
@@ -63,10 +63,10 @@ export default function CustomizedTables(props) {
         <TableBody>
           {props.dataFromdb1.map(row => (
             <StyledTableRow key={row.vaccination_id}>
-              <StyledTableCell align="left">{row.vaccination_id}</StyledTableCell>
-              <StyledTableCell align="left">{row.user_name}</StyledTableCell>
-              <StyledTableCell align="left">{row.vaccine_name}</StyledTableCell>
-              <StyledTableCell align="left">{row.vaccine_id}</StyledTableCell>
+              <StyledTableCell align="left">{row.vaccination.vaccine_info}</StyledTableCell>
+              <StyledTableCell align="left">{row.profile.user_name}</StyledTableCell>
+              <StyledTableCell align="left">{row.vaccination.vaccine_name}</StyledTableCell>
+              <StyledTableCell align="left">{row.vaccination.vaccine_id}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

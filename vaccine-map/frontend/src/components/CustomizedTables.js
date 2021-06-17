@@ -63,10 +63,10 @@ export default function CustomizedTables(props) {
         <TableBody>
           {props.dataFromdb1.map(row => (
             <StyledTableRow key={row.city}>
-              <StyledTableCell align="left">{row.city}</StyledTableCell>
-              <StyledTableCell align="left">{row.district}</StyledTableCell>
-              <StyledTableCell align="left">{row.vaccineType}</StyledTableCell>
-              <StyledTableCell align="left">{row.num}</StyledTableCell>
+              <StyledTableCell align="left">{row.profile.city}</StyledTableCell>
+              <StyledTableCell align="left">{row.profile.district}</StyledTableCell>
+              <StyledTableCell align="left">{row.vaccination.vaccine_name}</StyledTableCell>
+              <StyledTableCell align="left">{"100"}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
