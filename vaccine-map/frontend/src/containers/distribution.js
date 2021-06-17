@@ -84,8 +84,8 @@ export default class Item_search extends Component {
                 alert('Fail.');
         })
         .catch((err) => console.error(err));
-        // let test_data = [{city:"臺北市", district:"信義區", vaccineType:"A肝", num:"100"}]
-        // this.setState({dataFromdb1 : test_data})
+        let test_data = [{city:"臺北市", district:"信義區", vaccineType:"A肝", num:"100"}]
+        this.setState({dataFromdb1 : test_data})
     }
     edit = key => e => {
         if(key === 'city')
