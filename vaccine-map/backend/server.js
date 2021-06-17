@@ -265,7 +265,7 @@ async function getAllData(){
       }
     });
 }
-//getAllData();
+getAllData();
 
 async function computeInjected(){
   const filter = [
