@@ -3,6 +3,8 @@ import {
     MuiPickersUtilsProvider,
     KeyboardDatePicker,
   } from '@material-ui/pickers';
+import {vaccine} from '../data/buildingAttribute/vaccineMenu';
+import GridType1 from "../components/gridType1";
 import GridType3 from "../components/gridType3";
 import GridType4 from "../components/gridType4";
 import {city2} from '../data/buildingAttribute/cityMenu2';
@@ -245,12 +247,14 @@ export default class AddItemPage1 extends Component {
                 />
             </div>
             <div className="new_item-basic">
-                <GridType3
-                label="疫苗名稱"
+                <GridType1
+                id="vaccine_name"
+                label="疫苗種類"
+                helperText=""
+                choices={vaccine}
                 value={this.props.vaccine_name}
                 changeFunc={this.props.changeFunc("vaccine_name")}
-                ifRequired ={true}
-                width = {200}     
+                width={100}
                 />
                  <GridType3
                 label="疫苗編號"

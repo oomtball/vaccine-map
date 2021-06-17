@@ -68,8 +68,7 @@ export default class Item_search extends Component {
     }
     
     findObjectsForSearching = async () => {
-        let caseSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType,
-        user_name:this.state.user_name, user_id:this.state.user_id};
+        let caseSearched = {vaccineType:this.state.vaccineType, user_name:this.state.user_name, user_id:this.state.user_id};
         await fetch("http://localhost:3002/api/searchCase2", {
             method: 'POST',
             body: JSON.stringify(caseSearched),
