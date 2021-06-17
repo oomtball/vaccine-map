@@ -111,12 +111,8 @@ async function getRowData() {
     });
 };
 
-router.post('/searchCase1', (req, res) => {
-  console.log(req.body);
-  return res.json({ success: true });
-})
-
-router.post('/searchCase2', async (req, res) => {
+// Search by city, district, road, and vaccine_id
+router.post('/searchCase1', async (req, res) => {
   console.log(req.body);
   const searchFactor = req.body;
   const filter = [
@@ -126,7 +122,7 @@ router.post('/searchCase2', async (req, res) => {
       },
     },
     {
-      row: new RegExp(searchFactor.user_name + '-\\w+'),
+      row: new RegExp('\\w+-' + searchFactor.vaccine_id),
     }
   ];
   // Get rows that matches the vaccine ID in row key
@@ -140,6 +136,30 @@ router.post('/searchCase2', async (req, res) => {
           row.data['profile']['district'][0].value == searchFactor.district &&
           row.data['profile']['road'][0].value == searchFactor.road
       ));
+    });
+  // Compute the remaining number of vaccine
+  undefined;
+  // console.log(result_rows);
+  return res.json({ success: true, data: result_rows });
+})
+
+// Search by user_id and vaccine_id
+router.post('/searchCase2', async (req, res) => {
+  console.log(req.body);
+  const searchFactor = req.body;
+  const filter = [
+    {
+      column: {
+        cellLimit: 1, // Only retrieve the most recent version of the cell.
+      },
+    },
+    {
+      row: `${searchFactor.user_id}-${searchFactor.vaccine_id}`,
+    }
+  ];
+  const result_rows = await table.getRows({filter: filter})
+    .then(result => {
+      return result[0];
     });
   // console.log(result_rows);
   return res.json({ success: true, data: result_rows });
