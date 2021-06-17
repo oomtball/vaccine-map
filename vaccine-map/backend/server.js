@@ -139,8 +139,6 @@ router.post('/searchCase1', async (req, res) => {
             row.data['vaccination']['vaccine_name'][0].value == searchFactor.vaccine_name)
       ));
     });
-  // Compute the remaining number of vaccine
-  undefined;
   // console.log(result_rows);
   return res.json({ success: true, data: result_rows });
 })
@@ -156,12 +154,19 @@ router.post('/searchCase2', async (req, res) => {
       },
     },
     {
-      row: `${searchFactor.user_id}-${searchFactor.vaccine_id}`,
+      row: new RegExp(searchFactor.user_id + '-\\w+'),
     }
   ];
+  // Get rows that matches the vaccine ID in row key
+  // It is better to put all the factors on the key,
+  // so that the whole search can be down in one line.
   const result_rows = await table.getRows({filter: filter})
     .then(result => {
-      return result[0];
+      const base_rows = result[0];
+      return base_rows.filter(row => (
+          (searchFactor.vaccine_name == '不限' ? true :
+            row.data['vaccination']['vaccine_name'][0].value == searchFactor.vaccine_name)
+      ));
     });
   // console.log(result_rows);
   return res.json({ success: true, data: result_rows });
