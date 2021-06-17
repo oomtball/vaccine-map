@@ -67,10 +67,6 @@ export default class Item_search extends Component {
 		tableBack:"", rightStatus:"searching", dataFromdb1:[], patternFromDb:[]});
     }
     
-	findObjectsForSearching = () => {
-		let test_data = [{vaccination_id:"A333", user_name:"莊育澤", vaccine_name:"A", vaccine_id:"v222"}]
-        this.setState({dataFromdb1 : test_data})
-	}
     findObjectsForSearching = async () => {
         let caseSearched = {city:this.state.city, district:this.state.district, road:this.state.road, vaccineType:this.state.vaccineType,
         user_name:this.state.user_name, user_id:this.state.user_id};

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import { withRouter, BrowserRouter } from "react-router-dom";
 import Homepage from './containers/homepage';
-import Login from './containers/home';
+import Login from './containers/login';
 import './styles/login.css';
 
 class App extends Component {
