@@ -111,7 +111,7 @@ async function getRowData() {
     });
 };
 
-// Search by city, district, road, and vaccine_id
+// Search by city, district, road, and vaccine_name
 router.post('/searchCase1', async (req, res) => {
   console.log(req.body);
   const searchFactor = req.body;
@@ -121,9 +121,9 @@ router.post('/searchCase1', async (req, res) => {
         cellLimit: 1, // Only retrieve the most recent version of the cell.
       },
     },
-    {
+    /*{
       row: new RegExp('\\w+-' + searchFactor.vaccine_id),
-    }
+    }*/
   ];
   // Get rows that matches the vaccine ID in row key
   // It is better to put all the factors on the key,
@@ -134,7 +134,9 @@ router.post('/searchCase1', async (req, res) => {
       return base_rows.filter(row => (
           row.data['profile']['city'][0].value == searchFactor.city &&
           row.data['profile']['district'][0].value == searchFactor.district &&
-          row.data['profile']['road'][0].value == searchFactor.road
+          row.data['profile']['road'][0].value == searchFactor.road &&
+          (searchFactor.vaccine_name == '不限' ? true :
+            row.data['vaccination']['vaccine_name'][0].value == searchFactor.vaccine_name)
       ));
     });
   // Compute the remaining number of vaccine
