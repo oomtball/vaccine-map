@@ -49,7 +49,7 @@ router.post('/addOneCase', (req, res) => {
           "temp_gender": {timestamp: new Date(), value: temp.gender},
           "birthday": {timestamp: new Date(), value: temp.birthday},
           "city": {timestamp: new Date(), value: temp.city},
-          "district": {timestamp: new Date(), value: temp.city},
+          "district": {timestamp: new Date(), value: temp.district},
           "village": {timestamp: new Date(), value: temp.village},
           "neighbor": {timestamp: new Date(), value: temp.neighbor},
           "road": {timestamp: new Date(), value: temp.road},
