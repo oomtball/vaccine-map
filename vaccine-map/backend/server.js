@@ -116,7 +116,7 @@ router.post('/searchCase1', (req, res) => {
   return res.json({ success: true });
 })
 
-router.post('/searchCase2', (req, res) => {
+router.post('/searchCase2', async (req, res) => {
   console.log(req.body);
   const searchFactor = req.body;
   const filter = [
@@ -126,21 +126,22 @@ router.post('/searchCase2', (req, res) => {
       },
     },
     {
-      row: new RegExp('\\w+-' + searchFactor.user_name),
+      row: new RegExp(searchFactor.user_name + '-\\w+'),
     }
   ];
   // Get rows that matches the vaccine ID in row key
   // It is better to put all the factors on the key,
   // so that the whole search can be down in one line.
-  const base_rows = table.getRows({filter: filter});
-  // Filter the rows matching the constraints
-  // using the built-in filter in javascript.
-  const result_rows = base_rows.filter(row => {
-    return
-      row.data['profile']['city'][0].value == searchFactor.city &&
-      row.data['profile']['district'][0].value == searchFactor.district &&
-      row.data['profile']['road'][0].value == searchFactor.road;
-  });
+  const result_rows = await table.getRows({filter: filter})
+    .then(result => {
+      const base_rows = result[0];
+      return base_rows.filter(row => (
+          row.data['profile']['city'][0].value == searchFactor.city &&
+          row.data['profile']['district'][0].value == searchFactor.district &&
+          row.data['profile']['road'][0].value == searchFactor.road
+      ));
+    });
+  // console.log(result_rows);
   return res.json({ success: true, data: result_rows });
 })
 
@@ -244,7 +245,7 @@ async function getAllData(){
       }
     });
 }
-getAllData();
+//getAllData();
 app.use("/api", router);
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 
